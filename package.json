@@ -41,7 +41,7 @@
         "rollup-plugin-svelte": "^7.1.0",
         "shelljs": "^0.8.5",
         "sirv-cli": "^2.0.2",
-        "svelte": "^3.54.0",
+        "svelte": "^4.0.0",
         "svelte-check": "^2.9.2",
         "svelte-preprocess": "^4.10.7",
         "tslib": "^2.4.1",
@@ -49,6 +49,6 @@
     },
     "dependencies": {
         "custom-card-helpers": "^1.9.0",
-        "svelte": "^3.54.0"
+        "svelte": "^4.0.0"
     }
 }
