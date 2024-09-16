@@ -239,6 +239,8 @@ Clone and create a PR to help make the card even better.
 
 Please ⭐️ or sponsor this repo when you like it.
 @forker, i did some reearch about this card as im using aswell and love IT! we might consider get the card-mod team to help on getting the backgrounds transparent?
+[@thomaslovon](https://github.com/thomasloven/lovelace-card-mod)
+Do you wane to take a look with us about this?
 
 ## Sponsor ❤️
 
