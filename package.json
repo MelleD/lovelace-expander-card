@@ -18,7 +18,7 @@
   "devDependencies": {
       "@eslint/eslintrc": "^3.1.0",
       "@stylistic/eslint-plugin": "^2.9.0",
-      "@sveltejs/adapter-node": "^5.2.6",
+      "@sveltejs/adapter-node": "^5.2.8",
       "@sveltejs/enhanced-img": "^0.3.9",
       "@sveltejs/vite-plugin-svelte": "4.0.0-next.8",
       "@types/eslint": "9.6.1",
