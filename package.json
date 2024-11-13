@@ -28,7 +28,7 @@
       "eslint-plugin-prettier": "^5.2.1",
       "eslint-plugin-svelte": "^2.46.0",
       "globals": "^15.12.0",
-      "postcss-preset-env": "^10.0.9",
+      "postcss-preset-env": "^10.1.0",
       "prettier": "^3.3.3",
       "prettier-plugin-svelte": "^3.2.8",
       "svelte": "5.1.15",
