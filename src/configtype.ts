@@ -35,4 +35,5 @@ export interface ExpanderConfig {
     'expander-card-display'?: string;
     'min-width-expanded'?: number;
     'max-width-expanded'?: number;
+    icon?: string;
 }

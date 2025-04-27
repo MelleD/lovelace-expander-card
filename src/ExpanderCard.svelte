@@ -15,7 +15,8 @@
             'expander-card-display': 'block',
             'title-card-clickable': false,
             'min-width-expanded': 0,
-            'max-width-expanded': 0
+            'max-width-expanded': 0,
+            'icon': 'mdi:chevron-down'
         };
 </script>
 
@@ -169,7 +170,7 @@
                 class={`header ripple${config['title-card-button-overlay'] ? ' header-overlay' : ''}${open ? ' open' : ' close'}`}
                 aria-label="Toggle button"
             >
-                <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico${open ? ' flipped open' : 'close'}`} ></ha-icon>
+                <ha-icon style="--arrow-color:{config['arrow-color']}" icon="{config.icon}" class={`ico${open ? ' flipped open' : 'close'}`} ></ha-icon>
             </button>
         </div>
     {:else}
@@ -178,7 +179,7 @@
             style="--header-width:100%; --button-background:{config['button-background']};--header-color:{config['header-color']};"
         >
             <div class={`primary title${open ? ' open' : ' close'}`}>{config.title}</div>
-            <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico${open ? ' flipped open' : ' close'}`}></ha-icon>
+            <ha-icon style="--arrow-color:{config['arrow-color']}" icon="{config.icon}" class={`ico${open ? ' flipped open' : ' close'}`}></ha-icon>
         </button>
     {/if}
     {#if config.cards}
