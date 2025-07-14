@@ -17,6 +17,7 @@
             'min-width-expanded': 0,
             'max-width-expanded': 0,
             'icon': 'mdi:chevron-down'
+            'icon_animation_degrees': '180deg'
         };
 </script>
 
