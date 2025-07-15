@@ -17,6 +17,9 @@
             'min-width-expanded': 0,
             'max-width-expanded': 0,
             'icon': 'mdi:chevron-down'
+            'icon-rotate-degree': '180deg'
+            'border-radius': '0px'
+            'border': 'none'
         };
 </script>
 
@@ -155,7 +158,7 @@
     style="--expander-card-display:{config['expander-card-display']};
      --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding};
      --expander-state:{open};
-     --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']}">
+     --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']};--border-radius:{config['border-radius']};--border:{config.border};--icon-rotate-degree:{config['icon-rotate-degree']}">
     {#if config['title-card']}
         <div id='id1' class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
             <div id='id2' class="title-card-container" style="--title-padding:{config['title-card-padding']}"
@@ -203,6 +206,8 @@
         gap: var(--gap);
         padding: var(--padding);
         background: var(--card-background,#fff);
+        border-radius: var(--border-radius,0px);
+        border: var(--border,none);
     }
     .children-container {
         padding: var(--child-padding);
@@ -255,7 +260,7 @@
     }
 
     .flipped {
-        transform: rotate(180deg);
+        transform: rotate(var(--icon-rotate-degree,180deg));
     }
 
     .ripple {
