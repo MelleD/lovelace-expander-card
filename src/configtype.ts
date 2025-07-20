@@ -39,6 +39,7 @@ export interface ExpanderConfig {
     'storgage-id'?: string;
     'border-radius'?: string;
     border?: string;
+    shadow?: string;
     'icon-rotate-degree'?: string;
     'show-button-users'?: { type: string }[];
     'start-expanded-users'?: { type: string }[];
