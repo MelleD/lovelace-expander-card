@@ -19,7 +19,7 @@
             'icon': 'mdi:chevron-down',
             'border-radius': '0px',
             'border': 'none',
-            'icon-rotate-degree': '180deg'
+            'icon-rotate-degree': '180deg',
             'shadow': 'var(--ha-card-shadow-box,none)'
         };
 </script>
