@@ -20,6 +20,7 @@
             'border-radius': '0px',
             'border': 'none',
             'icon-rotate-degree': '180deg'
+            'shadow': 'var(--ha-card-shadow-box,none)'
         };
 </script>
 
@@ -161,6 +162,7 @@
     class={`expander-card${config.clear ? ' clear' : ''}${open ? ' open' : ' close'}`}
     style="--border-radius:{config['border-radius']};
            --border:{config.border};
+           --shadow:{config.shadow};
            --icon-rotate-degree:{config['icon-rotate-degree']};
            --expander-card-display:{config['expander-card-display']};
            --gap:{open ? config['expanded-gap'] : config.gap};
@@ -221,7 +223,7 @@
         background: var(--card-background,#fff);
         border-radius: var(--border-radius,0px);
         border: var(--border,none);
-        box-shadow: none;
+        box-shadow: var(--shadow,(var(--ha-card-box-shadow,none)));
         transition: box-shadow 0s;
     }
     .children-container {
