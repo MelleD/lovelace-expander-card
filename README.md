@@ -73,6 +73,7 @@ Yaml Options:
 | expander-card-display     | string   | block         | css-display            | Layout/Display of the card                            |
 | border-radius             | string   | _0px_         | css-border-radius      | Changing the radius of the whole card                 |
 | border                    | string   | _none_        | css-border             | Add border(stroke) to the card                        |
+| shadow                    | string   | _ha-default_  | css-shadow-box         | Changing the default shadow of the card               |
 | icon-rotate-degree        | string   | _180deg_      | css-rotate             | Changing the degrees of the button icon when clicked  |
 | show-button-users         | object[] | **optional**  | *                      | Choose the users that button is visible to them       |
 | start-expanded-users      | object[] | **optional**  | *                      | Choose the users that card will be start expanded for them|
