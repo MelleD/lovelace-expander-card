@@ -221,6 +221,8 @@
         background: var(--card-background,#fff);
         border-radius: var(--border-radius,0px);
         border: var(--border,none);
+        box-shadow: none;
+        transition: box-shadow 0s;
     }
     .children-container {
         padding: var(--child-padding);
