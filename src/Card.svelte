@@ -80,18 +80,16 @@ limitations under the License.
         }
 
         if (clearCardCss) {
-            const observer = new MutationObserver(() => {
-                clearHaCardStyle(el);
-            });
-
-            observer.observe(el, {
-                childList: true,
-                subtree: true
-            });
+            el.style.setProperty('--ha-card-background', 'transparent');
+            el.style.setProperty('--ha-card-box-shadow', 'none');
+            el.style.setProperty('--ha-card-border-color', 'transparent');
+            el.style.setProperty('--ha-card-border-width', '0px');
+            el.style.setProperty('--ha-card-border-radius', '0px');
+            el.style.setProperty('--ha-card-backdrop-filter', 'none');
         }
 
         if (animation) {
-            const reszizeObserver = new ResizeObserver((entries) => {
+            const resizeObserver = new ResizeObserver((entries) => {
                 for (const entry of entries) {
                     if (entry.contentBoxSize) {
                         const contentBoxSize = Array.isArray(entry.contentBoxSize)
@@ -103,7 +101,7 @@ limitations under the License.
                     }
                 }
             });
-            reszizeObserver.observe(el);
+            resizeObserver.observe(el);
         }
 
         // eslint-disable-next-line svelte/no-dom-manipulating
@@ -111,48 +109,6 @@ limitations under the License.
         container = el;
         loading = false;
     });
-
-
-    function clearHaCardStyle(el: HTMLElement, maxAttempts = 5) {
-        let attempts = 0;
-        const initHaCards = () => {
-            const haCards: HTMLElement[] = [];
-
-            function collectHaCards(node: Element | ShadowRoot) {
-                if (node instanceof Element && node.tagName.toLowerCase() === 'ha-card') {
-                    haCards.push(node as HTMLElement);
-                    return;
-                }
-
-                if ((node as Element).shadowRoot) {
-                    collectHaCards((node as Element).shadowRoot!);
-                }
-
-                const children = (node instanceof ShadowRoot || node instanceof Element)
-                    ? Array.from((node as Element).children)
-                    : [];
-
-                children.forEach(collectHaCards);
-            }
-
-            collectHaCards(el);
-
-            if (haCards.length > 0) {
-                haCards.forEach((card) => {
-                    card.style.setProperty('border', 'none', 'important');
-                    card.style.setProperty('background', 'transparent', 'important');
-                    card.style.setProperty('box-shadow', 'none', 'important');
-                });
-            } else {
-                attempts++;
-                if (attempts < maxAttempts) {
-                    requestAnimationFrame(initHaCards);
-                }
-            }
-        };
-
-        initHaCards();
-    }
 
 </script>
 
