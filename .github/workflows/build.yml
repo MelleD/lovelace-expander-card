@@ -1,7 +1,7 @@
 name: 'Build'
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - main
   push:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: github/issue-labeler@v3.4
-        if: github.event_name == 'pull_request_target'
+        if: github.event_name == 'pull_request'
         with:
           configuration-path: .github/labeler.yml
           include-title: 1
