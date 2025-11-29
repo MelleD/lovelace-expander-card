@@ -33,6 +33,12 @@ export interface HuiCard extends LovelaceCard {
     _element?: LovelaceCard;
 }
 
+export interface HaRipple extends HTMLElement {
+    disabled?: boolean;
+    startPressAnimation(event?: Event): void;
+    endPressAnimation(): void;
+}
+
 export interface ExpanderCardDomEventDetail {
     'expander-card-id'?: string;
     action?: 'open' | 'close' | 'toggle';

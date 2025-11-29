@@ -66,14 +66,14 @@ Yaml Options:
 | child-margin-top          | string   | _0.0em_       | css-size               | Margin top of child cards                             |
 | clear-children            | boolean  | _false_       | true\|false            | Remove Background, border from childs                                   |
 | title-card                | object   | **optional**  | LovelaceCardConfig     | Replace Title with card                               |
-| title-card-clickable      | boolean  | _false_       | true\|false            | Should the complete diff clickable?                   |
-| title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card                 |
+| title-card-clickable      | boolean  | _false_       | true\|false            | Should the complete div be clickable?               |
+| title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card. If you set `title-card-clickable: true` the overlay will extend across the expander and capture the click before the title-card. |
 | overlay-margin            | string   | _0.0em_       | css-size               | Margin from top right of expander button (if overlay) |
 | title-card-padding        | string   | _0px_         | css-size               | padding of title-card                                 |
 | show-button-users         | object[] | **optional**  | *                      | Choose the persons/users that button is visible to them. |
 | start-expanded-users      | object[] | **optional**  | *                      | Choose the persons/users that card will be start expanded for them. |
 | cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                     |
-| style                     | string   | **optional**. | css style rules        | Advanced css styling rules                        |
+| style                     | string   | **optional**. | css style rules        | Advanced css styling rules. if you wish to style/hide the hover/press ripple of the expander-card button you can use advanced styling. See [Hover/press ripple](#hoverpress-ripple). |
 
 ## Examples
 
@@ -120,6 +120,7 @@ Example title card that is clickable and has 2 nested cards, which is directly e
           name: null
           show_wind: speed
 ```
+
 ### Heading Title card
 
 Example with [heading](https://www.home-assistant.io/dashboards/heading/) title card to the possiblity to style your title.
@@ -243,6 +244,7 @@ The configuration below will open or close the expander when you tap the Mushroo
             expander-card-id: my-light-card
             action: toggle
 ```
+
 ## Set state via action
 
 You can set the state of expander card(s) using the `fire-dom-event` action on any card that supports actions.
@@ -288,11 +290,11 @@ tap_action:
 
 You can do advanced styling using the `style` configuration parameter. Classes available are per the images below.
 
-![Expander Card Styling - Title](examples/styling1.png)
+![Expander Card Styling - Title](examples/styling2.png)
 
-![Expander Card Styling - Card](examples/styling2.png)
+![Expander Card Styling - Title Card](examples/styling1.png)
 
-![Expander Card Styling - Card & Overlay](examples/styling3.png)
+![Expander Card Styling - Title Card & Overlay](examples/styling3.png)
 
 ### State
 
@@ -328,7 +330,7 @@ style: |-
   }
 ```
 
-Only the background of the button. Here `!important` is needed to override the hover ripple.
+Only the background of the button. Here `!important` is needed if you wish to override the hover ripple.
 
 ```yaml
 style: |
@@ -352,16 +354,25 @@ style: |
   }
 ```
 
-If you have a title-card
+If you have a title-card - without overlay
 
 ```yaml
 style: |
-.title-card-header {
-  flex-direction: row-reverse !important;
-  padding: 0.8em 0 !important;
-}
+  .title-card-header {
+    flex-direction: row-reverse !important;
+    padding: 0.8em 0 !important;
+  }
 ```
 
+If you have a title-card - with overlay
+
+```yaml
+style: |
+  .title-card-header-overlay > .header-overlay {
+    flex-direction: row-reverse !important;
+    padding: 0.8em 0 !important;
+  }
+```
 
 Transitioning the title font size and color. Here the `!important` on `close`/`closing` is to make sure that the font size and color both change on `closing` as `open` will still be added until fully closed at which stage `close` will be added and `open` removed.
 
@@ -384,18 +395,47 @@ style: |
   }
 ```
 
-Change the title size 
+Change the title size
+
 ```yaml
-    style: |
-      .title {
-        font-size: var(--ha-font-size-l);
-      }
+style: |
+  .title {
+    font-size: var(--ha-font-size-l);
+  }
 ```
+
+## Hover/press ripple
+
+Expander-card uses the inbuilt Home Assistant ripple element `ha-ripple` for hover/press ripple animation on for expander-card button. If you wish to style/hide the ripple you can use the following CSS variables with advanced styling. If these are set in your theme they will be applied and you don't need to do anything at all.
+
+**NOTE**: If you only wish to style the expander-card ripple itself you will need to apply to the appropriate class listed below. Otherwise if you apply to `.expander-card` it will change the ripple for all cards within the expander.
+
+| Config | Class |
+|--------|-------|
+| No title card | `.header` |
+| Title card without overlay | `.title-card-header` |
+| Title card with overlay | `.header` |
+
+Change the hover/press ripple color. No title card.
+
+```yaml
+style: |
+  .header {
+    -ha-ripple-color: red;
+  }
+```
+
+| Ripple CSS Variable | Usage   | Accepts | Default |
+|---------------------|---------|---------|---------|
+| `--ha-ripple-color` | Hover/press ripple color. Set to `none` if you wish to disable all ripples. | CSS color | `var(--secondary-text-color)` |
+| `--ha-ripple-hover-color` | Hover ripple color. Set if you wish it to be different from pressed color. | CSS color | `var(--ha-ripple-color, var(--secondary-text-color))` |
+| `--ha-ripple-pressed-color` | Pressed ripple color. Set if you wish to be different from hover color. | CSS color | `var(--ha-ripple-color, var(--secondary-text-color))` |
+| `--ha-ripple-hover-opacity` | Opacity of the hover ripple. | CSS opacity | 0.08 |
+| `--ha-ripple-pressed-opacity` | Opacity of the pressed ripple. | CSS opacity | 0.12 | 
 
 ## Card Mod
 
 Before the `style` attribute, [card mod](https://github.com/thomasloven/lovelace-card-mod) was used to style the card. Although card-mod still works, it is better to switch everything to use the `style` attribute. Please do not open issue(s) when card mod is not working.
-
 
 ## Installation
 

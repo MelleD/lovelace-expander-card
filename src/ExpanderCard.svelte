@@ -51,7 +51,7 @@
 }}/>
 
 <script lang="ts">
-    import type { ExpanderCardDomEventDetail, HomeAssistant } from './types';
+    import type { ExpanderCardDomEventDetail, HaRipple, HomeAssistant } from './types';
     import Card from './Card.svelte';
     import { onMount } from 'svelte';
     import type { ExpanderConfig } from './configtype';
@@ -72,6 +72,9 @@
     let animationState: AnimationState = $state<AnimationState>('idle');
     let animationTimeout: ReturnType<typeof setTimeout> | null = $state(null);
     let backgroundAnimationDuration = $state(0);
+    let titleCardDiv: HTMLElement | null = $state(null);
+    let buttonElement: HTMLElement | null = $state(null);
+    let ripple: HaRipple | null = $state(null);
 
     const configId = config['storage-id'];
     const lastStorageOpenStateId = 'expander-open-' + configId;
@@ -185,6 +188,56 @@
         document.body.removeEventListener('ll-custom', handleDomEvent);
     };
 
+    let touchElement: HTMLElement | undefined;
+    let isScrolling = false;
+    let startX = 0;
+    let startY = 0;
+    const touchStart = (event: TouchEvent) => {
+        ripple && (ripple.disabled = true);
+        touchElement = event.target as HTMLElement;
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+        isScrolling = false;
+    };
+
+    const touchMove = (event: TouchEvent) => {
+        const currentX = event.touches[0].clientX;
+        const currentY = event.touches[0].clientY;
+        if (Math.abs(currentX - startX) > 10 || Math.abs(currentY - startY) > 10) {
+            isScrolling = true;
+        }
+    };
+
+    const touchCancel = () => {
+        ripple && (ripple.disabled = false);
+        touchElement = undefined;
+        isScrolling = false;
+    };
+
+    const touchEnd = () => {
+        ripple && (ripple.disabled = false);
+    };
+
+    const touchEndAction = (event: TouchEvent) => {
+        if (!isScrolling && touchElement === event.target && config['title-card-clickable']) {
+            forwardHaptic(touchElement, 'light');
+            toggleOpen();
+            touchPreventClick = true;
+            // A touch event may not always be followed by a click event so we set a timeout to reset
+            touchPreventClickTimeout = window.setTimeout(() => {
+                touchPreventClick = false;
+                touchPreventClickTimeout = null;
+            }, 100);
+            //  A touch event may not always be followed by a click event so we manually control the ripple
+            if (ripple) {
+                ripple.startPressAnimation();
+                ripple.endPressAnimation();
+            }
+        }
+        touchElement = undefined;
+        isScrolling = false;
+    };
+
     onMount(() => {
         const minWidthExpanded = config['min-width-expanded'];
         const maxWidthExpanded = config['max-width-expanded'];
@@ -206,6 +259,20 @@
 
         document.body.addEventListener('ll-custom', handleDomEvent);
 
+        let touchEventElement: HTMLElement | undefined;
+        if (config['title-card-clickable'] && !config['title-card-button-overlay'] && titleCardDiv) {
+            touchEventElement = titleCardDiv;
+        } else if (buttonElement) {
+            touchEventElement = buttonElement;
+        }
+        if (touchEventElement) {
+            touchEventElement.addEventListener('touchstart', touchStart, { passive: true, capture: true });
+            touchEventElement.addEventListener('touchmove', touchMove, { passive: true,capture: true });
+            touchEventElement.addEventListener('touchcancel', touchCancel, { passive: true, capture: true });
+            touchEventElement.addEventListener('touchend', touchEnd, { passive: true, capture: true });
+            touchEventElement.addEventListener('touchend', touchEndAction, { passive: false, capture: false });
+        }
+
         return cleanup;
     });
 
@@ -223,46 +290,6 @@
         forwardHaptic(event.currentTarget as HTMLElement, 'light');
         toggleOpen();
     };
-
-    const buttonClickDiv = (event: MouseEvent) => {
-        const target = event.currentTarget as HTMLElement | null;
-        if (target?.classList.contains('title-card-container')) {
-            buttonClick(event);
-        }
-    };
-
-    let touchElement: HTMLElement | undefined;
-    let isScrolling = false;
-    let startX = 0;
-    let startY = 0;
-    const touchStart = (event: TouchEvent) => {
-        touchElement = event.target as HTMLElement;
-        startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
-        isScrolling = false;
-    };
-
-    const touchMove = (event: TouchEvent) => {
-        const currentX = event.touches[0].clientX;
-        const currentY = event.touches[0].clientY;
-        if (Math.abs(currentX - startX) > 10 || Math.abs(currentY - startY) > 10) {
-            isScrolling = true;
-        }
-    };
-
-    const touchEnd = (event: TouchEvent) => {
-        if (!isScrolling && touchElement === event.target && config['title-card-clickable']) {
-            forwardHaptic(touchElement, 'light');
-            toggleOpen();
-            touchPreventClick = true;
-            // A touch event may not always be followed by a click event so we set a timeout to reset
-            touchPreventClickTimeout = window.setTimeout(() => {
-                touchPreventClick = false;
-                touchPreventClickTimeout = null;
-            }, 100);
-        }
-        touchElement = undefined;
-    };
 </script>
 
 <ha-card
@@ -278,13 +305,15 @@
     ">
     {#if config['title-card']}
         <div id='id1' class={`title-card-header${config['title-card-button-overlay'] ?
-            '-overlay' : ''}${open ? ' open' : ' close'}${config.animation ? ' animation ' + animationState : ''}`}>
+            '-overlay' : ''}${open ? ' open' : ' close'}${config.animation ?
+            ' animation ' + animationState : ''}${config['title-card-clickable'] ? ' clickable' : ''}`}
+            onclick={config['title-card-clickable'] && !config['title-card-button-overlay'] ? buttonClick : null}
+            role={config['title-card-clickable'] && !config['title-card-button-overlay'] ? 'button' : undefined}
+            bind:this={titleCardDiv}
+            >
             <div id='id2'
                 class={`title-card-container${open ? ' open' : ' close'}${config.animation ? ' animation ' + animationState : ''}`}
-                style="--title-padding:{config['title-card-padding'] ? config['title-card-padding'] : '0px'};"
-                ontouchstart={touchStart} ontouchmove={touchMove} ontouchend={touchEnd}
-                onclick={config['title-card-clickable'] ? buttonClickDiv : null}
-                role={config['title-card-clickable'] ? 'button' : undefined}>
+                style="--title-padding:{config['title-card-padding'] ? config['title-card-padding'] : '0px'};">
                 <Card hass={hass}
                     preview={preview}
                     config={config['title-card']}
@@ -296,32 +325,42 @@
                 />
             </div>
             {#if showButtonUsers}
-                <button onclick={buttonClick}
+                <button
+                    onclick={!config['title-card-clickable'] || config['title-card-button-overlay'] ? buttonClick : null }
                     style="--overlay-margin:{config['overlay-margin']}; --button-background:{config[
                         'button-background'
                     ]}; --header-color:{config['header-color']};"
-                    class={`header ripple${config['title-card-button-overlay'] ?
+                    class={`header ${config['title-card-button-overlay'] ?
                         ' header-overlay' : ''}${open ? ' open' : ' close'}${config.animation ? ' animation ' + animationState : ''}`}
                     aria-label="Toggle button"
+                    bind:this={buttonElement}
                 >
                     <ha-icon style="--arrow-color:{config['arrow-color']}"
                       icon={config.icon}
                       class={`ico${open && animationState !=='closing' ? ' flipped open' : ' close'}${config.animation ? ' animation ' + animationState : ''}`}>
                     </ha-icon>
+                    {#if !config['title-card-clickable'] || config['title-card-button-overlay'] }
+                    <ha-ripple bind:this={ripple}></ha-ripple>
+                    {/if}
                 </button>
+            {/if}
+            {#if config['title-card-clickable'] && !config['title-card-button-overlay'] }
+            <ha-ripple bind:this={ripple}></ha-ripple>
             {/if}
         </div>
     {:else}
         {#if showButtonUsers}
             <button onclick={buttonClick}
-                class={`header${config['expander-card-background-expanded'] ? '' : ' ripple'}${open ? ' open' : ' close'}${config.animation ? ' animation ' + animationState : ''}`}
+                class={`header${open ? ' open' : ' close'}${config.animation ? ' animation ' + animationState : ''}`}
                 style="--header-width:100%; --button-background:{config['button-background']};--header-color:{config['header-color']};"
-            >
+                bind:this={buttonElement}
+                >
                 <div class={`primary title${open ? ' open' : ' close'}`}>{config.title}</div>
                 <ha-icon style="--arrow-color:{config['arrow-color']}"
                   icon={config.icon}
                   class={`ico${open && animationState !=='closing' ? ' flipped open' : ' close'}${config.animation ? ' animation ' + animationState : ''}`}>
                 </ha-icon>
+                <ha-ripple bind:this={ripple}></ha-ripple>
             </button>
         {/if}
     {/if}
@@ -360,6 +399,7 @@
         gap: var(--gap);
         padding: var(--padding);
         background: var(--card-background,#fff);
+        -webkit-tap-highlight-color: transparent;
     }
     .expander-card.animation {
         transition: gap 0.35s ease, background-color var(--background-animation-duration, 0) ease;
@@ -392,6 +432,12 @@
         align-items: center;
         justify-content: space-between;
         flex-direction: row;
+        position: relative;
+    }
+    .title-card-header.clickable {
+        cursor: pointer;
+        border-style: none;
+        border-radius: var(--ha-card-border-radius, var(--ha-border-radius-lg));
     }
     .title-card-header-overlay {
         display: block;
@@ -404,18 +450,27 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 0.8em 0.8em;
-        margin: 2px;
+        padding: 0.85em 0.85em;
         background: var(--button-background);
         border-style: none;
+        border-radius: var(--ha-card-border-radius, var(--ha-border-radius-lg));
         width: var(--header-width,auto);
         color: var(--header-color,#fff);
+        cursor: pointer;
+        position: relative;
     }
     .header-overlay {
         position: absolute;
         top: 0;
         right: 0;
         margin: var(--overlay-margin);
+    }
+    .title-card-header-overlay.clickable  > .header-overlay {
+        width: calc(100% - var(--overlay-margin) * 2);
+        justify-content: flex-end;
+    }
+    .title-card-header-overlay.clickable > .title-card-container {
+        width: calc(100% - var(--overlay-margin) * 2);
     }
     .title {
         width: 100%;
@@ -431,19 +486,5 @@
 
     .flipped {
         transform: rotate(var(--icon-rotate-degree,180deg));
-    }
-
-    .ripple {
-        background-position: center;
-        transition: background 0.8s;
-        border-radius: 1em;
-    }
-    .ripple:hover {
-        background: #ffffff12 radial-gradient(circle, transparent 1%, #ffffff12 1%) center/15000%;
-    }
-    .ripple:active {
-        background-color: #ffffff25;
-        background-size: 100%;
-        transition: background 0s;
     }
 </style>
