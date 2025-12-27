@@ -152,18 +152,19 @@
     }
 
     function dispatchOpenStateEvent(openState: boolean) {
-        if (config['expander-card-id']) {
-            const detail: ExpanderCardEventDetail = {};
-            detail[config['expander-card-id']] = {
-                property: 'open',
-                value: openState
-            };
-            document.dispatchEvent(new CustomEvent('expander-card', {
-                detail: detail,
-                bubbles: true,
-                composed: true
-            }));
+        if (!config['expander-card-id']) {
+            return;
         }
+        const detail: ExpanderCardEventDetail = {};
+        detail[config['expander-card-id']] = {
+            property: 'open',
+            value: openState
+        };
+        document.dispatchEvent(new CustomEvent('expander-card', {
+            detail: detail,
+            bubbles: true,
+            composed: true
+        }));
     }
 
     function userInList(userList: string[] | undefined): boolean | undefined {
