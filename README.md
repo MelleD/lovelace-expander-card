@@ -608,6 +608,8 @@ On a busy dashboard with many expander cards, and perhaps nested expander cards,
 
 If you do not wish to have expander cards expanded by default when in edit/preview mode, you can set `preview-expanded: false` in `expander-card:` yaml key at the top of your dashboard "Raw configuration". It is recommended you place this at the top of your dashboard "Raw configuration" before any Home Assistant view/panel yaml configuration.
 
+> NOTE: Any expander card using `expanded` templates will always honour the template when in preview/edit mode, including sending open state events to other expanders, regardless of the `preview-expanded:` setting. This way the preview/edit mode will match the current display of expander cards on the dashboard.
+
 To access your dashboard "Raw configuration" from the UI use the following steps:
 
 - Go to the dashboard you wish to edit.
