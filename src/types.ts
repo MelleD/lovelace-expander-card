@@ -40,6 +40,14 @@ export interface HaRipple extends HTMLElement {
     endPressAnimation(): void;
 }
 
+export interface HuiRoot extends HTMLElement {
+    lovelace?: {
+        config: {
+            [key: string]: unknown;
+        };
+    };
+}
+
 export interface ExpanderCardLlCustomEventDetail {
     'expander-card-id'?: string;
     action?: 'open' | 'close' | 'toggle';

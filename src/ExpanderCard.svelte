@@ -472,7 +472,7 @@
 
         document.body.addEventListener('ll-custom', handleLlCustomEvent);
         document.body.addEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
-      
+
         const touchEventElement = getTouchEventElement();
 
         if (touchEventElement) {
