@@ -54,11 +54,12 @@
     import type { ExpanderCardDomEventDetail, HaRipple, HomeAssistant } from './types';
     import Card from './Card.svelte';
     import { onMount, untrack } from 'svelte';
-    import type { ExpanderCardTemplates, ExpanderConfig } from './configtype';
+    import type { ExpanderCardTemplates, ExpanderConfig, ExpanderCardRawConfig } from './configtype';
     import type { AnimationState } from './types';
     import { forwardHaptic } from './helpers/forward-haptic';
     import { isJSTemplate, getJSTemplateRenderer, trackJSTemplate, setJSTemplateRef } from './helpers/templates';
     import type { HomeAssistantJavaScriptTemplatesRenderer } from 'home-assistant-javascript-templates';
+    import { getDashboardRawConfig } from './helpers/raw-config';
 
     const {
         hass,
@@ -83,6 +84,7 @@
     const variableRenders: Record<string, Promise<(() => void)>> = {};
     const templateRenderers: Record<string, Promise<(() => void)>> = {};
     const templateValues: Record<string, unknown> = $state({});
+    let dashboardRawConfig: ExpanderCardRawConfig = $state( getDashboardRawConfig() );
 
     const userStyleTemplateOrConfig: string | null = $derived(templateValues.style !== undefined ?
         `<style>${String(templateValues.style)}</style>` :
@@ -108,7 +110,7 @@
         if (templateValues.expanded === undefined) {
             return;
         }
-        if (untrack(() => preview)) {
+        if (untrack(() => preview && dashboardRawConfig['preview-expanded'] !== false)) {
             return;
         }
         const resultBoolean = Boolean(templateValues.expanded);
@@ -124,7 +126,7 @@
             return;
         }
         previewState = preview;
-        if (previewState) {
+        if (previewState && dashboardRawConfig['preview-expanded'] !== false) {
             setOpenState(true);
             showButtonUsers = true;
             return;
@@ -238,6 +240,15 @@
         }
     }
 
+    function handleRawConfigUpdate(event: Event) {
+        const rawConfig: ExpanderCardRawConfig = (event as CustomEvent).detail?.rawConfig;
+        if (rawConfig) {
+            if (JSON.stringify(rawConfig) !== JSON.stringify(dashboardRawConfig)) {
+                dashboardRawConfig = rawConfig;
+            }
+        }
+    };
+
     function handleDomEvent(event: Event) {
         const data: ExpanderCardDomEventDetail = (event as CustomEvent).detail?.['expander-card']?.data;
         if (data?.['expander-card-id'] && data['expander-card-id'] === config['expander-card-id']) {
@@ -259,6 +270,7 @@
 
     function cleanup() {
         document.body.removeEventListener('ll-custom', handleDomEvent);
+        document.body.removeEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
         Object.entries(templateRenderers).forEach(([key, renderer]) => {
             renderer.then((untrackFunc) => {
                 untrackFunc();
@@ -389,12 +401,22 @@
     }
 
     function setStateByPreview() {
-        if (preview) {
+        if (!preview) {
+            return;
+        }
+        if (dashboardRawConfig['preview-expanded'] !== false) {
             setOpenState(true);
             return;
         }
 
-        if (!configTemplate('expanded')) {
+        if (configTemplate('expanded')) {
+            const templateExpanded = untrack(() => templateValues.expanded);
+            if (templateExpanded !== undefined) {
+                setOpenState(Boolean(templateExpanded));
+            } else {
+                setOpenState(false);
+            }
+        } else{
             setDefaultOpenState();
         }
     }
@@ -415,6 +437,7 @@
         setStateByPreview();
 
         document.body.addEventListener('ll-custom', handleDomEvent);
+        document.body.addEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
 
         const touchEventElement = getTouchEventElement();
 
