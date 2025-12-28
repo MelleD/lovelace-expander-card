@@ -41,4 +41,6 @@ window.customCards.push(...[ // NOSONAR es2019
     }
 ]);
 
-customElements.define('expander-card-title-card-edit-form', TitleCardEditForm);
+if (!customElements.get('expander-card-title-card-edit-form')) {
+    customElements.define('expander-card-title-card-edit-form', TitleCardEditForm);
+}
