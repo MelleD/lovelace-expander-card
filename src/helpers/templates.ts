@@ -1,4 +1,5 @@
 import HomeAssistantJavaScriptTemplates, { HomeAssistant, HomeAssistantJavaScriptTemplatesRenderer } from 'home-assistant-javascript-templates';
+import { ExpanderCardEventDetail } from '../types';
 
 export function getJSTemplateRenderer(variables: Record<string, unknown> = {}, refs: Record<string, unknown> = {}): Promise<HomeAssistantJavaScriptTemplatesRenderer> {
     return new HomeAssistantJavaScriptTemplates(
@@ -47,4 +48,26 @@ export function setJSTemplateRef(
     void templatesRenderer.then((renderer) => {
         renderer.refs[refName] = refValue;
     });
+}
+
+function eventHandler(templatesRenderer: Promise<HomeAssistantJavaScriptTemplatesRenderer>, event: Event) {
+    void templatesRenderer.then((renderer) => {
+        const detail = (event as CustomEvent).detail as ExpanderCardEventDetail;
+        Object.keys(detail).forEach((key) => {
+            const property = detail[key].property;
+            const value = detail[key].value;
+            const variableName = `${key}_${property}`;
+            renderer.refs[variableName] = value;
+        });
+    });
+}
+
+export function trackJSTemplateEvent(
+    templatesRenderer: Promise<HomeAssistantJavaScriptTemplatesRenderer>,
+    eventName: string): () => void {
+    const boundEventHandler = eventHandler.bind(null, templatesRenderer);
+    document.addEventListener(eventName, boundEventHandler as EventListener);
+    return () => {
+        document.removeEventListener(eventName, boundEventHandler as EventListener);
+    };
 }
