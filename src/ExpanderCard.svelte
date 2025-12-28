@@ -115,10 +115,13 @@
             return;
         }
         const resultBoolean = Boolean(templateValues.expanded);
-        if (resultBoolean !== untrack(() => open)) {
-            // Use queueMicrotask to avoid effect loop as open needs to be updated after this effect completes.
-            queueMicrotask(() => toggleOpen(resultBoolean));
-        }
+
+        // Use queueMicrotask to avoid effect loop as open needs to be updated after this effect completes.
+        queueMicrotask(() => {
+            if (resultBoolean !== open) {
+                toggleOpen(resultBoolean);
+            }
+        });
     });
 
     $effect(() => {
@@ -431,11 +434,8 @@
         }
     }
 
-    function setStateByPreview() {
-        if (!preview) {
-            return;
-        }
-        if (dashboardRawConfig['preview-expanded'] !== false) {
+    function setOpenStateByPreview() {
+        if (preview && dashboardRawConfig['preview-expanded'] !== false) {
             // all expanders will be open so we don't dispatch event
             setOpenState(true);
             return;
@@ -444,9 +444,9 @@
         if (configTemplate('expanded')) {
             const templateExpanded = untrack(() => templateValues.expanded);
             if (templateExpanded !== undefined) {
-                setOpenState(Boolean(templateExpanded));
+                setOpenStateAndDispatchEvent(Boolean(templateExpanded));
             } else {
-                setOpenState(false);
+                setOpenStateAndDispatchEvent(false);
             }
         } else{
             setDefaultOpenState();
@@ -468,7 +468,7 @@
         // dispatch initial state to listeners once templates are bound
         dispatchOpenStateEvent(false);
         setExpandedFromConfig();
-        setStateByPreview();
+        setOpenStateByPreview();
 
         document.body.addEventListener('ll-custom', handleLlCustomEvent);
         document.body.addEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
