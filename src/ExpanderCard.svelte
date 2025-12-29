@@ -54,11 +54,12 @@
     import type { ExpanderCardEventDetail, ExpanderCardLlCustomEventDetail, HaRipple, HomeAssistant } from './types';
     import Card from './Card.svelte';
     import { onMount, untrack } from 'svelte';
-    import type { ExpanderCardTemplates, ExpanderConfig } from './configtype';
+    import type { ExpanderCardTemplates, ExpanderConfig, ExpanderCardRawConfig } from './configtype';
     import type { AnimationState } from './types';
     import { forwardHaptic } from './helpers/forward-haptic';
     import { isJSTemplate, getJSTemplateRenderer, trackJSTemplate, setJSTemplateRef, trackJSTemplateEvent } from './helpers/templates';
     import type { HomeAssistantJavaScriptTemplatesRenderer } from 'home-assistant-javascript-templates';
+    import { getDashboardRawConfig } from './helpers/raw-config';
 
     const {
         hass,
@@ -84,6 +85,7 @@
     const variableRenders: Record<string, Promise<(() => void)>> = {};
     const templateRenderers: Record<string, Promise<(() => void)>> = {};
     const templateValues: Record<string, unknown> = $state({});
+    let dashboardRawConfig: ExpanderCardRawConfig = $state( getDashboardRawConfig() );
 
     const userStyleTemplateOrConfig: string | null = $derived(templateValues.style !== undefined ?
         `<style>${String(templateValues.style)}</style>` :
@@ -109,14 +111,17 @@
         if (templateValues.expanded === undefined) {
             return;
         }
-        if (untrack(() => preview)) {
+        if (untrack(() => preview && dashboardRawConfig['preview-expanded'] !== false)) {
             return;
         }
         const resultBoolean = Boolean(templateValues.expanded);
-        if (resultBoolean !== untrack(() => open)) {
-            // Use queueMicrotask to avoid effect loop as open needs to be updated after this effect completes.
-            queueMicrotask(() => toggleOpen(resultBoolean));
-        }
+
+        // Use queueMicrotask to avoid effect loop as open needs to be updated after this effect completes.
+        queueMicrotask(() => {
+            if (resultBoolean !== open) {
+                toggleOpen(resultBoolean);
+            }
+        });
     });
 
     $effect(() => {
@@ -125,7 +130,7 @@
             return;
         }
         previewState = preview;
-        if (previewState) {
+        if (previewState && dashboardRawConfig['preview-expanded'] !== false) {
             setOpenState(true);
             showButtonUsers = true;
             return;
@@ -260,6 +265,16 @@
         }
     }
 
+    function handleRawConfigUpdate(event: Event) {
+        const rawConfig: ExpanderCardRawConfig = (event as CustomEvent).detail?.rawConfig;
+        if (!rawConfig) {
+            return;
+        }
+        if (JSON.stringify(rawConfig) !== JSON.stringify(dashboardRawConfig)) {
+            dashboardRawConfig = rawConfig;
+        }
+    };
+
     function handleLlCustomEvent(event: Event) {
         const data: ExpanderCardLlCustomEventDetail = (event as CustomEvent).detail?.['expander-card']?.data;
         if (data?.['expander-card-id'] && data['expander-card-id'] === config['expander-card-id']) {
@@ -281,6 +296,7 @@
 
     function cleanup() {
         document.body.removeEventListener('ll-custom', handleLlCustomEvent);
+        document.body.removeEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
         Object.entries(templateRenderers).forEach(([key, renderer]) => {
             renderer.then((untrackFunc) => {
                 untrackFunc();
@@ -419,14 +435,21 @@
         }
     }
 
-    function setStateByPreview() {
-        if (preview) {
+    function setOpenStateByPreview() {
+        if (preview && dashboardRawConfig['preview-expanded'] !== false) {
             // all expanders will be open so we don't dispatch event
             setOpenState(true);
             return;
         }
 
-        if (!configTemplate('expanded')) {
+        if (configTemplate('expanded')) {
+            const templateExpanded = untrack(() => templateValues.expanded);
+            if (templateExpanded !== undefined) {
+                setOpenStateAndDispatchEvent(Boolean(templateExpanded));
+            } else {
+                setOpenStateAndDispatchEvent(false);
+            }
+        } else{
             setDefaultOpenState();
         }
     }
@@ -446,9 +469,10 @@
         // dispatch initial state to listeners once templates are bound
         dispatchOpenStateEvent(false);
         setExpandedFromConfig();
-        setStateByPreview();
+        setOpenStateByPreview();
 
         document.body.addEventListener('ll-custom', handleLlCustomEvent);
+        document.body.addEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
 
         const touchEventElement = getTouchEventElement();
 
