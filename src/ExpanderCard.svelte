@@ -267,10 +267,11 @@
 
     function handleRawConfigUpdate(event: Event) {
         const rawConfig: ExpanderCardRawConfig = (event as CustomEvent).detail?.rawConfig;
-        if (rawConfig) {
-            if (JSON.stringify(rawConfig) !== JSON.stringify(dashboardRawConfig)) {
-                dashboardRawConfig = rawConfig;
-            }
+        if (!rawConfig) {
+            return;
+        }
+        if (JSON.stringify(rawConfig) !== JSON.stringify(dashboardRawConfig)) {
+            dashboardRawConfig = rawConfig;
         }
     };
 
