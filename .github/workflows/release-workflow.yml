@@ -6,7 +6,12 @@ on:
       release_version:
         description: 'Version number of the release'
         required: true
-
+      prerelease:
+        description: 'Mark as pre-release (RC versions)'
+        required: false
+        type: boolean
+        default: false
+        
 jobs:
   gh_tagged_release:
     name: Create tagged release
@@ -41,7 +46,6 @@ jobs:
         run: pnpm run build
 
       - name: "Create Github release (full)"
-        if: ${{ !contains( github.event.inputs.release_version, '-rc' ) }}
         uses: softprops/action-gh-release@v2
         id: expander_card_release
         with:
@@ -49,13 +53,14 @@ jobs:
           tag_name: ${{ github.event.inputs.release_version }}
           target_commitish: "main"
           draft: false
-          prerelease: false
+          prerelease: ${{ github.event.inputs.prerelease }}
           files: dist/*
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
 
       - name: "Notify issues of release their fix is contained in"
+        if: ${{ !github.event.inputs.prerelease }}
         uses: apexskier/github-release-commenter@3bd413ad5e1d603bfe2282f9f06f2bdcec079327 # v1.3.6
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
