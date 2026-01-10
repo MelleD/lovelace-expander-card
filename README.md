@@ -51,7 +51,7 @@ Yaml Options:
 | max-width-expanded        | number   | 0             | number            | Max screen width (px) to be expanded on start (use with start expanded above)                                        |
 | storage-id                | string   | **optional**  | *                      | Save last expander state in local browser storage     |
 | expander-card-id          | string    | **optional** | *                      | An id to use with [Set state via action](#set-state-via-action)        |
-| arrow-color               | string   | primary-text-color,#fff | css-color    | Color of ico expand button                     |
+| arrow-color               | string   | primary-text-color,#fff | css-color    | Color of icon expand button                     |
 | icon-rotate-degree        | string   | _180deg_      | css-rotate             | Changing the degrees of the button icon when clicked  |
 | header-color              | string   | primary-text-color,#fff  | css-color   | Color of expand button                     |
 | button-background         | string   | _transparent_ | css-color              | Background color of expand button                     |
@@ -59,7 +59,7 @@ Yaml Options:
 | expander-card-background-expanded    | string   |  Empty    | css-color              | Expander Card Background when card is opened/expanded|
 | expander-card-display     | string   | block         | css-display            | Layout/Display of the card                            |
 | clear                     | boolean  | _false_       | true\|false            | Remove Background, border                                   |
-| gap                       | string   | _0.0em_       | css-size               | gap between cards when expander closed. This option depends on your CSS layout: You might need to use `expander-card-display: grid` for this.                |
+| gap                       | string   | _0.0em_       | css-size               | gap between cards when expander is closed. This option depends on your CSS layout: You might need to use `expander-card-display: grid` for this.                |
 | padding                   | string   | _1em_         | css-size               | padding of all card content                           |
 | expanded-gap              | string   | _0.6em_       | css-size               | gap between child cards when expander open            |
 | child-padding             | string   | _0.0em_       | css-size               | padding of child cards                                |
@@ -125,7 +125,7 @@ Example title card that is clickable and has 2 nested cards, which is directly e
 
 ### Heading Title card
 
-Example with [heading](https://www.home-assistant.io/dashboards/heading/) title card to the possibility to style your title.
+Example with [heading](https://www.home-assistant.io/dashboards/heading/) title card to provide the possibility of styling your title.
 
 ```yaml
       - type: custom:expander-card
@@ -144,8 +144,7 @@ Example with [heading](https://www.home-assistant.io/dashboards/heading/) title 
 
 ### Template Title card with Mushroom
 
-If you need templates in your title, you can make good use of the Mushroom cards. Here's an example using the [Mushroom title card](//github.com/piitaya/lovelace-mushroom/blob/main/docs/cards/title.md).
-https:
+If you need templates in your title, you can make good use of the Mushroom cards. Here's an example using the [Mushroom title card](https://github.com/piitaya/lovelace-mushroom/blob/main/docs/cards/title.md).
 
 ```yaml
       - type: custom:expander-card
@@ -189,7 +188,7 @@ Example with title that is clickable and has 2 nested cards.
 
 ### Title with min-width-expanded
 
-Example with title that is clickable and has 2 nested cards with are automatically expanded when the screen is more than 300px.
+Example with title that is clickable and has 2 nested cards which are automatically expanded when the screen is more than 300px.
 
 ```yaml
       - type: custom:expander-card
@@ -278,7 +277,7 @@ Variables are defined in the `variables` list of expander card config.
 | List item | Type | Config |
 | --------- | ---- | ------ |
 | `variable` | string | The `<name>` of the variable which will be available in templates as `variable.<name>`. |
-| `value_template` | string \| value \| object | Either javascript that returns a value or a straight value. Javascript must be enclosed by `[[[]]]` with only whitespace preceding of following. |
+| `value_template` | string \| value \| object | Either javascript that returns a value or a straight value. Javascript must be enclosed by `[[[]]]` with only whitespace preceding or following. |
 
 Variable `weather_warnings` tracking the state of `input_boolean.weather_warnings`.
 
@@ -461,7 +460,7 @@ When Expander card animation is enabled, for all elements except those listed be
 2. `margin-bottom` on each children card's `.outer-container` is used to transition cards sliding down and up while animating. Do not style `margin-bottom` and if altering any transitions, extend the included `transition` style for `opening` and `closing`.
 3. As much as possible, use class selector combinations to get your styles to a higher specificity. e.g. `.expander-card.animation.open` is more specific than any built in classes so if you use that selector, you as less likely to need to use `!important`.
 4. For animation, during opening, the classes will be `open` and `opening`. During closing, classes will be `open` and `closing` until the close sequence has ended after which the classes will be `close` and `idle`.
-5. If you are considering any transition affects, check those already applied and extend those with any styling you add.
+5. If you are considering any transition effects, check those already applied and extend those with any styling you add.
 
 ### Styling Examples
 
@@ -661,7 +660,7 @@ Expander-Card is available in [HACS][hacs] (Home Assistant Community Store) by d
 
 ### Issue after upgrade to HA 2025.6
 
-There is/was an issue after upgrading to HA 2025.6 (maybe with newer version is not valid anymore)
+There was an issue after upgrading to HA 2025.6 (this may not be valid anymore in newer versions)
 See [forum](https://community.home-assistant.io/t/expander-accordion-collapsible-card/738817/56?u=melled) and [issue](https://github.com/MelleD/lovelace-expander-card/issues/506).
 For the view type [sections](https://www.home-assistant.io/blog/2024/03/04/dashboard-chapter-1/) `cards` is not working anymore. You have to rename it to `sections`.
 
