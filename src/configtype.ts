@@ -55,3 +55,7 @@ export interface ExpanderConfig {
     variables?: Record<string, ExpanderCardVariables>;
     templates?: Record<string, ExpanderCardTemplates>;
 }
+
+export interface ExpanderCardRawConfig {
+    'preview-expanded'?: boolean;
+}
