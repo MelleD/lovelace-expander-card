@@ -16,9 +16,9 @@ First a few words to start with. A big thank you goes to [@Alia5](https://github
 
 ## 🚀 Quick Start
 
-Go to [Quick Start](https://melled.github.io/portfolio-performance-vorabpauschale/quick-start/) for installation instruction.
+Go to [Quick Start](https://melled.github.io/lovelace-expander-card/quick-start/) for installation instruction.
 
-- [Full Documentation](https://melled.github.io/portfolio-performance-vorabpauschale)
+- [Full Documentation](https://melled.github.io/lovelace-expander-card)
 
 ## Support
 
