@@ -67,6 +67,6 @@ nav:
   - 'Contribution':
     - 'chapter/contribution/contribution.md'
   - 'FAQ':
-      - 'chapter/details/technical-details.md'
+      - 'chapter/faq/faq.md'
 repo_url: https://github.com/MelleD/lovelace-expander-card
 edit_uri: blob/master/docs/source/
