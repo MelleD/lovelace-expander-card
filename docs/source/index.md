@@ -17,17 +17,18 @@ Follow [Quick start](quick-start.md) for the initial installation / setup
 
 ---
 
-Expand button as overlay:
+### Expand button as overlay:
+
 ![Sample lights overlay](chapter/assets/lights_overlay_button.png)
 
 ---
 
-You can even nest expanders!  
+### You can even nest expanders!  
 
 ![Sample nesting](chapter/assets/nested.png)
 
 ---
 
-Clear Background (default theme):  
+### Clear Background (default theme):  
 
 ![Sample clear router](chapter/assets/clear_router.png)

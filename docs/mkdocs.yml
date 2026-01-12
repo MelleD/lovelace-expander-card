@@ -52,8 +52,7 @@ nav:
     - 'chapter/configuration/index.md'
     - 'chapter/configuration/configuration-overview.md'
     - 'chapter/configuration/gui-configuration.md'
-    - 'Examples':
-        - 'chapter/configuration/examples/index.md'
+    - 'chapter/configuration/examples.md'
   - 'Template':
     - 'chapter/templating/index.md'
     - 'chapter/templating/template.md'
@@ -61,8 +60,7 @@ nav:
   - 'Styling':
     - 'chapter/style/index.md'
     - 'chapter/style/style.md'
-    - 'Styling Examples':
-        - 'chapter/style/examples/index.md'
+    - 'chapter/style/styling-examples.md'
     - 'chapter/style/hover.md'
     - 'chapter/style/card-mod.md'
   - 'Contribution':
