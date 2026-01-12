@@ -1,4 +1,4 @@
-# Qick Start
+# Quick Start
 
 ## Installation
 

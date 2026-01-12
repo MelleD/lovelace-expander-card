@@ -1,5 +1,3 @@
-# Styling Examples
-
 This page provides practical examples of styling the Expander Card using the `style` configuration parameter. Each example includes complete YAML code that you can copy and adapt to your needs.
 
 These examples demonstrate various styling techniques, from simple color changes to complex animations and layout modifications. Understanding these patterns will help you create custom designs that perfectly match your dashboard.
