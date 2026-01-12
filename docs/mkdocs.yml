@@ -60,7 +60,7 @@ nav:
   - 'Styling':
     - 'chapter/style/index.md'
     - 'chapter/style/style.md'
-    - 'Examples':
+    - 'Styling Examples':
         - 'chapter/style/examples/yaml-styling-examples.md'
     - 'chapter/style/hover.md'
     - 'chapter/style/card-mod.md'

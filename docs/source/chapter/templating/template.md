@@ -1,4 +1,4 @@
-# Template Support
+# Javascript Template
 
 Expander card supports javascript templates for the config items listed below. This list may be added to over time based on user feature requests. If you wish for a config item to be supported by javascript template please submit a feature request.
 

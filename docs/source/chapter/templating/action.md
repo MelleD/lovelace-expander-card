@@ -14,8 +14,6 @@ You can set the state of expander card(s) using the `fire-dom-event` action on a
         action: < open | close | toggle >
  ```
 
-Example
-
 ## Expander card config
 
 ```yaml

@@ -2,11 +2,11 @@
 
 You can do advanced styling using the `style` configuration parameter. Classes available are per the images below.
 
-![Expander Card Styling - Title](assets/styling2.png)
+![Expander Card Styling - Title](../assets/styling2.png)
 
-![Expander Card Styling - Title Card](assets/styling1.png)
+![Expander Card Styling - Title Card](../assets/styling1.png)
 
-![Expander Card Styling - Title Card & Overlay](assets/styling3.png)
+![Expander Card Styling - Title Card & Overlay](../assets/styling3.png)
 
 ## State
 
