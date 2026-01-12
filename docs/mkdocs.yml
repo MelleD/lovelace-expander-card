@@ -60,13 +60,13 @@ nav:
   - 'Styling':
     - 'chapter/style/index.md'
     - 'chapter/style/style.md'
-    - 'Examples':
+    - 'Styling Examples':
         - 'chapter/style/examples/yaml-styling-examples.md'
     - 'chapter/style/hover.md'
     - 'chapter/style/card-mod.md'
   - 'Contribution':
     - 'chapter/contribution/contribution.md'
   - 'FAQ':
-      - 'chapter/details/technical-details.md'
+      - 'chapter/faq/faq.md'
 repo_url: https://github.com/MelleD/lovelace-expander-card
 edit_uri: blob/master/docs/source/
