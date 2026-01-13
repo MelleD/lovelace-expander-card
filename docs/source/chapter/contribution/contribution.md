@@ -116,8 +116,9 @@ The ultimate contribution! We appreciate code contributions, documentation impro
 - **Commit messages**: Use clear, descriptive messages
 - **Be patient**: Maintainers will review your PR as soon as possible
 
-### Development Setup
+### Local Development Setup
 
+#### Build & Install
 ```bash
 # Install dependencies
 npm install
@@ -125,14 +126,37 @@ npm install
 pnpm install
 
 # Start development server
-npm run dev
+npm run srv
 
 # Build for production
 npm run build
 
-# Run linting
+# Run es linting
 npm run lint
+
+# Fix es linting
+npm run lint-fix
 ```
+
+#### Docs
+
+Go to docs folder and install [zensical](https://zensical.org/docs/get-started/)
+
+```bash
+# cd docs
+cd docs
+
+# Install zensical https://zensical.org/docs/get-started/
+...
+
+# build docs
+zensical build --clean
+
+# starte server
+zensical serve
+```
+
+Open browser on [http://localhost:8000](http://localhost:8000)
 
 ## Other Ways to Contribute
 
