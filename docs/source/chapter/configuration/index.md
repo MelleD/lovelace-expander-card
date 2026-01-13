@@ -38,4 +38,4 @@ For detailed information on using the graphical editor, see the [Graphical Confi
 
 Learn best through practical examples! In our examples section, you'll find a collection of pre-configured Expander Cards demonstrating various use cases and styling possibilities.
 Each example includes the complete YAML code. You can copy the examples directly and adapt them to your needs.
-Visit the [YAML Examples Page](yaml-examples.md) to see what's possible and get inspired for your own dashboard designs!
+Visit the [YAML Examples Page](examples.md) to see what's possible and get inspired for your own dashboard designs!

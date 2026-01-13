@@ -2,7 +2,7 @@
 
 You can set the state of expander card(s) using the `fire-dom-event` action on any card that supports actions.
 
-1. Set expander card(s) to have `expander-card-id`. Multiple expander cards can shared the same id if you wish to set their state together.
+1. Set expander card(s) to have `expander-card-id`. Multiple expander cards can share the same id if you wish to set their state together.
 2. Set action on another card using the `fire-dom-event` action.
 
  ```yaml

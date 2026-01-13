@@ -4,7 +4,7 @@
 
 ### HACS
 
-Expander-Card is available in [HACS][hacs] (Home Assistant Community Store) by default.
+Expander-Card is available in [HACS](https://www.hacs.xyz/) (Home Assistant Community Store) by default.
 
 1. Install HACS if you don't have it already
 2. Open HACS in Home Assistant
@@ -14,7 +14,7 @@ Expander-Card is available in [HACS][hacs] (Home Assistant Community Store) by d
 
 ### Manual
 
-1. Download `expander-card.js` file from the [latest release][release-url].
+1. Download `expander-card.js` file from the [latest release](https://github.com/MelleD/lovelace-expander-card/releases/latest).
 2. Put `expander-card.js` file into your `config/www` folder.
 3. Add reference to `expander-card.js` in Dashboard. There's two way to do that:
     - **Using UI:** _Settings_ → _Dashboards_ → _More Options icon_ → _Resources_ → _Add Resource_ → Set _Url_ as `/local/expander-card.js` → Set _Resource type_ as `JavaScript Module`.
@@ -26,6 +26,3 @@ Expander-Card is available in [HACS][hacs] (Home Assistant Community Store) by d
             - url: /local/expander-card.js
               type: module
         ```
-
-## Usage
-

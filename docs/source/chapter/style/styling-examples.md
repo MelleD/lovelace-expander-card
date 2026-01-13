@@ -1,3 +1,5 @@
+# Styling examples
+
 This page provides practical examples of styling the Expander Card using the `style` configuration parameter. Each example includes complete YAML code that you can copy and adapt to your needs.
 
 These examples demonstrate various styling techniques, from simple color changes to complex animations and layout modifications. Understanding these patterns will help you create custom designs that perfectly match your dashboard.
@@ -198,12 +200,14 @@ cards:
 ### Specificity
 
 Use class selector combinations to increase specificity and avoid needing `!important`:
+
 - `.expander-card.animation.open` is more specific than just `.expander-card`
 - `.header.animation.open > .title` targets specifically the title in an open animated header
 
 ### Animation States
 
 When styling for animations, remember:
+
 - During opening: `open` and `opening` classes are both present
 - During closing: `open` and `closing` classes are both present until fully closed
 - When idle: `idle` class is present along with either `open` or `close`
@@ -211,6 +215,7 @@ When styling for animations, remember:
 ### Transitions
 
 For smooth animations:
+
 - Use matching transition durations (expander card uses `0.35s ease` by default)
 - Apply transitions to the base element, not just the state classes
 - Style both opening and closing states for seamless transitions
@@ -218,6 +223,7 @@ For smooth animations:
 ### Testing
 
 Always test your styles in the Home Assistant UI:
+
 - Check both light and dark themes if your instance supports theme switching
 - Test expansion and collapse animations to ensure smooth transitions
 - Verify that hover effects work as expected
@@ -226,6 +232,7 @@ Always test your styles in the Home Assistant UI:
 ### Resources
 
 For more advanced styling:
+
 - See the [Advanced Styling Guide](../style.md) for CSS class documentation
 - Check [Hover Effects](../hover.md) for ripple customization
 - Review Home Assistant's CSS variables in your theme configuration
