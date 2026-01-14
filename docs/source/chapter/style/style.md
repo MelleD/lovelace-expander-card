@@ -25,4 +25,3 @@ When Expander card animation is enabled, for all elements except those listed be
 3. As much as possible, use class selector combinations to get your styles to a higher specificity. e.g. `.expander-card.animation.open` is more specific than any built in classes so if you use that selector, you as less likely to need to use `!important`.
 4. For animation, during opening, the classes will be `open` and `opening`. During closing, classes will be `open` and `closing` until the close sequence has ended after which the classes will be `close` and `idle`.
 5. If you are considering any transition effects, check those already applied and extend those with any styling you add.
-

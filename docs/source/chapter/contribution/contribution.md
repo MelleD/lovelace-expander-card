@@ -15,6 +15,7 @@ To submit a feature request:
 [Submit a Feature Request](https://github.com/MelleD/lovelace-expander-card/issues/new?template=feature_request.md)
 
 **Template includes:**
+
 - Feature description
 - Use case scenarios
 - Proposed implementation (optional)
@@ -35,6 +36,7 @@ When reporting a bug:
 [Report a Bug](https://github.com/MelleD/lovelace-expander-card/issues/new?template=bug_report.md)
 
 **What to include:**
+
 - Clear description of the issue
 - Steps to reproduce
 - Expected behavior vs actual behavior
@@ -56,6 +58,7 @@ Discussion categories:
 [Join the Discussion](https://github.com/MelleD/lovelace-expander-card/discussions)
 
 **Perfect for:**
+
 - Asking "how do I..." questions
 - Sharing your custom configurations
 - Discussing potential features before opening an issue
@@ -69,6 +72,7 @@ The ultimate contribution! We appreciate code contributions, documentation impro
 ### How to Submit a Pull Request
 
 1. **Fork the repository**
+
    ```bash
    # Fork via GitHub UI, then clone your fork
    git clone https://github.com/YOUR_USERNAME/lovelace-expander-card.git
@@ -76,6 +80,7 @@ The ultimate contribution! We appreciate code contributions, documentation impro
    ```
 
 2. **Create a feature branch**
+
    ```bash
    git checkout -b feature/AmazingFeature
    # or
@@ -89,13 +94,16 @@ The ultimate contribution! We appreciate code contributions, documentation impro
    - Update documentation if needed
 
 4. **Commit your changes**
+
    ```bash
    git add .
    git commit -m 'Add some AmazingFeature'
    ```
+
    Use clear, descriptive commit messages
 
 5. **Push to your fork**
+
    ```bash
    git push origin feature/AmazingFeature
    ```
@@ -119,6 +127,7 @@ The ultimate contribution! We appreciate code contributions, documentation impro
 ### Local Development Setup
 
 #### Build & Install
+
 ```bash
 # Install dependencies
 npm install
@@ -152,7 +161,7 @@ cd docs
 # build docs
 zensical build --clean
 
-# starte server
+# start server to see updates in realtime
 zensical serve
 ```
 
@@ -173,6 +182,7 @@ Be respectful, constructive, and welcoming. We're all here to make the Expander 
 ## Questions?
 
 Not sure where to start? Feel free to:
+
 - Open a [discussion](https://github.com/MelleD/lovelace-expander-card/discussions)
 - Comment on existing issues
 - Check the [documentation](https://github.com/MelleD/lovelace-expander-card/blob/main/README.md)

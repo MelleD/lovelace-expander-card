@@ -3,12 +3,12 @@
 Expander card supports javascript templates for the config items listed below. This list may be added to over time based on user feature requests. If you wish for a config item to be supported by javascript template please submit a feature request.
 
 | Config item | Accepts value | Overrides config items |
-| ----------- | ------------- | ---------------------- |
-| `expanded`  | boolean (`true\|false`) | `expanded`, `min-width-expanded`, `max-width-expanded`, `start-expanded-users` |
-| `title`     | string        | `title` |
-| `icon`      | string        | `icon`  |
-| `arrow-color` | CSS color (string)  | `arrow-color` |
-| `style`     | string        | `style` |
+| --- | --- | --- |
+| `expanded` | boolean (`true\|false`) | `expanded`, `min-width-expanded`, `max-width-expanded`, `start-expanded-users` |
+| `title` | string | `title` |
+| `icon` | string | `icon` |
+| `arrow-color` | CSS color (string) | `arrow-color` |
+| `style` | string | `style` |
 
 Javascript templates are implemented using the [home-assistant-javascript-templates](https://github.com/elchininet/home-assistant-javascript-templates) library by @elchininet. For objects and methods supported see [Objects and methods available in the templates](https://github.com/elchininet/home-assistant-javascript-templates#objects-and-methods-available-in-the-templates). The `config` object is also available which is the config object for the expander card where all config items can be read. e.g. `config['expander-card-id']`.
 
@@ -48,7 +48,7 @@ Templates are defined in the `templates` list of expander card config.
 
 | List item | Type | Config |
 | --------- | ---- | ------ |
-| `template` | string | The config item being templated. Only supported config items will be read by expander card. See list in main [Advanced javascript templates](#advanced-javascript-templates) section. |
+| `template` | string | The config item being templated. Only supported config items will be read by expander card. See list in main [Advanced javascript templates](../templating/template.md) section. |
 | `value_template` | string \| value \| object | Either javascript that returns a value or a straight value. Javascript must be enclosed by `[[[]]]` with only whitespace preceding of following. The type of the value \| object returned/set must be applicable to the config item being templated. |
 
 Template for `expanded` config item tracking state of `input_boolean.weather_warnings`.
