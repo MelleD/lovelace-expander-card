@@ -27,7 +27,7 @@
         "eslint": "^9.39.1",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prefer-arrow": "^1.2.3",
-        "eslint-plugin-prettier": "^5.5.4",
+        "eslint-plugin-prettier": "^5.5.5",
         "eslint-plugin-svelte": "^3.14.0",
         "globals": "^17.0.0",
         "postcss-preset-env": "^11.1.0",
