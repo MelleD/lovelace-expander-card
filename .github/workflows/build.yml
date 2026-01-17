@@ -25,7 +25,7 @@ jobs:
           include-body: 0
           enable-versioned-regex: 0
           repo-token: ${{ secrets.GITHUB_TOKEN  }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup Git
         run: |
           git config user.name github-actions
