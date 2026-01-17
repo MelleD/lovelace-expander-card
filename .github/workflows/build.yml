@@ -36,7 +36,7 @@ jobs:
         with:
             version: 9
             run_install: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         name: Install Node.js
         with:
             node-version: 20
