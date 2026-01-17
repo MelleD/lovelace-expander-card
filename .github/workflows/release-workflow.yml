@@ -11,15 +11,23 @@ on:
         required: false
         type: boolean
         default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
         
 jobs:
   gh_tagged_release:
     name: Create tagged release
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Git
         run: |
@@ -44,6 +52,19 @@ jobs:
 
       - name: Build Project
         run: pnpm run build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+      - run: pip install zensical
+        working-directory: docs
+      - run: zensical build --clean
+        working-directory: docs
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/site
+      - uses: actions/deploy-pages@v4
 
       - name: "Create Github release (full)"
         uses: softprops/action-gh-release@v2
