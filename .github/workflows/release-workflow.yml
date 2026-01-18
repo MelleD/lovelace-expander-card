@@ -75,9 +75,7 @@ jobs:
           target_commitish: main
           draft: false
           prerelease: "$PRE_RELEASE"
-          files: |
-            release-artifacts/*.zip
-            release-artifacts/checksums.txt
+          files: dist/*
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
