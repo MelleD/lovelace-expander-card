@@ -66,19 +66,24 @@ jobs:
           path: docs/site
       - uses: actions/deploy-pages@v4
 
-      - name: "Create Github release (full)"
-        uses: softprops/action-gh-release@v2
-        id: expander_card_release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b #v2
+        id: github_release
         with:
-          body: "Release version ${{ github.event.inputs.release_version }}."
-          tag_name: ${{ github.event.inputs.release_version }}
-          target_commitish: "main"
+          name: "Release v$VERSION"
+          tag_name: "$TAG_NAME"
+          target_commitish: main
           draft: false
-          prerelease: ${{ github.event.inputs.prerelease }}
-          files: dist/*
+          prerelease: "$PRE_RELEASE"
+          files: |
+            release-artifacts/*.zip
+            release-artifacts/checksums.txt
           generate_release_notes: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ github.event.inputs.release_version }}
+          TAG_NAME: ${{ github.event.inputs.release_version }}
+          PRE_RELEASE: ${{ github.event.inputs.prerelease }}
 
       - name: "Notify issues of release their fix is contained in"
         if: ${{ !github.event.inputs.prerelease }}
