@@ -1,0 +1,29 @@
+name: 'Label PR'
+
+on:
+  pull_request_target:
+    types: [opened, edited]
+    branches:
+      - main
+
+jobs:
+  label: 
+    permissions:
+      contents:  read
+      pull-requests: write
+      issues: write
+    name: Label Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - name:  Checkout configuration
+        uses: actions/checkout@v6
+        # Hier wird bewusst main ausgecheckt für die Config-Datei
+        
+      - name: Label issues
+        uses: github/issue-labeler@v3.4
+        with:
+          configuration-path: . github/labeler.yml
+          include-title: 1
+          include-body: 0
+          enable-versioned-regex: 0
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
