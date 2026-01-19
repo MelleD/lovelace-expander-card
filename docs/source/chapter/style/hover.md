@@ -15,7 +15,7 @@ Change the hover/press ripple color. No title card.
 ```yaml
 style: |
   .header {
-    -ha-ripple-color: red;
+    --ha-ripple-color: red;
   }
 ```
 
