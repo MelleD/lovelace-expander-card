@@ -27,6 +27,8 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
+  logo: chapter/assets/logo.png
+  favicon: chapter/assets/logo.png
   primary: indigo
   accent: light blue
 extra:

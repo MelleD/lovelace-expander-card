@@ -9,6 +9,8 @@
 
 Expander/Collapsible card for HomeAssistant  
 
+<img src="https://melled.github.io/lovelace-expander-card/chapter/assets/logo.png" width="400">
+
 ## Introduction
 
 First a few words to start with. A big thank you goes to [@Alia5](https://github.com/Alia5/lovelace-expander-card), who initially launched the card. I forked this card for my own HomeAssistant to make a few improvements. I give no guarantee for the functionality and no promise of lifelong maintenance, as I do the whole thing in my free time. Of course, I am happy about every contribution and PR
