@@ -316,6 +316,12 @@
         });
     };
 
+    const triggerHapticFeedback = (element: HTMLElement) => {
+        if (config.haptic && config.haptic !== 'none') {
+            forwardHaptic(element, config.haptic);
+        }
+    };
+
     let touchElement: HTMLElement | undefined;
     let isScrolling = false;
     let startX = 0;
@@ -346,9 +352,7 @@
 
     const touchEndAction = (event: TouchEvent) => {
         if (!isScrolling && touchElement === event.target && config['title-card-clickable']) {
-            if (config.haptic && config.haptic !== 'none') {
-                forwardHaptic(touchElement, config.haptic);
-            }
+            triggerHapticFeedback(touchElement);
             toggleOpen();
             touchPreventClick = true;
             // A touch event may not always be followed by a click event so we set a timeout to reset
@@ -507,9 +511,7 @@
 
     const buttonClick = (event: MouseEvent) => {
         if (!touchPreventClick) {
-            if (config.haptic && config.haptic !== 'none') {
-                forwardHaptic(event.currentTarget as HTMLElement, config.haptic);
-            }
+            triggerHapticFeedback(event.currentTarget as HTMLElement);
             toggleOpen();
             return undefined;
         }
