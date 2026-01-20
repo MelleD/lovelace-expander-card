@@ -9,6 +9,7 @@ All configurations are available for editing in Graphical config editor. Config 
 |icon :octicons-project-template-24:|string|mdi:chevron-down|mdi icon shortcut|Icon in button|
 |expanded :octicons-project-template-24:|boolean|_false_|true\|false|Start expanded|
 |animation|boolean|_true_|true\|false|Should the opening/closing of expander be animated?|
+|haptic|string|_light_|light\|medium\|heavy\|success\|warning\|failure\|selection\|none|Haptic feedback type for Home Assistant Companion app on iOS and Android when expanding/collapsing the card. Set to 'none' to disable haptic feedback.|
 |min-width-expanded|number|0|number|Min screen width (px) to be expanded on start (use with start expanded above)|
 |max-width-expanded|number|0|number|Max screen width (px) to be expanded on start (use with start expanded above)|
 |storage-id|string|**optional**|*|Save last expander state in local browser storage|

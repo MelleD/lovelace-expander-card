@@ -19,7 +19,8 @@
             'max-width-expanded': 0,
             'icon': 'mdi:chevron-down',
             'icon-rotate-degree': '180deg',
-            'animation': true
+            'animation': true,
+            'haptic': 'light' as const
         };
         import { loadExpanderCardEditor } from './ExpanderCardEditor';
 </script>
@@ -315,6 +316,12 @@
         });
     };
 
+    const triggerHapticFeedback = (element: HTMLElement) => {
+        if (config.haptic && config.haptic !== 'none') {
+            forwardHaptic(element, config.haptic);
+        }
+    };
+
     let touchElement: HTMLElement | undefined;
     let isScrolling = false;
     let startX = 0;
@@ -345,7 +352,7 @@
 
     const touchEndAction = (event: TouchEvent) => {
         if (!isScrolling && touchElement === event.target && config['title-card-clickable']) {
-            forwardHaptic(touchElement, 'light');
+            triggerHapticFeedback(touchElement);
             toggleOpen();
             touchPreventClick = true;
             // A touch event may not always be followed by a click event so we set a timeout to reset
@@ -504,7 +511,7 @@
 
     const buttonClick = (event: MouseEvent) => {
         if (!touchPreventClick) {
-            forwardHaptic(event.currentTarget as HTMLElement, 'light');
+            triggerHapticFeedback(event.currentTarget as HTMLElement);
             toggleOpen();
             return undefined;
         }
