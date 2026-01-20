@@ -50,6 +50,7 @@ export interface ExpanderConfig {
     'show-button-users'?: string[];
     'start-expanded-users'?: string[];
     animation?: boolean;
+    haptic?: 'success' | 'warning' | 'failure' | 'light' | 'medium' | 'heavy' | 'selection' | 'none';
     'expander-card-id'?: string;
     style?: string;
     variables?: Record<string, ExpanderCardVariables>;

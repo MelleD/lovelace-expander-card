@@ -102,6 +102,25 @@ export const ExpanderCardEditorSchema = [
                                 ...booleanField('animation', 'Enable animation')
                             },
                             {
+                                name: 'haptic',
+                                label: 'Haptic feedback',
+                                selector: {
+                                    select: {
+                                        mode: 'dropdown',
+                                        options: [
+                                            { value: 'light', label: 'Light' },
+                                            { value: 'medium', label: 'Medium' },
+                                            { value: 'heavy', label: 'Heavy' },
+                                            { value: 'success', label: 'Success' },
+                                            { value: 'warning', label: 'Warning' },
+                                            { value: 'failure', label: 'Failure' },
+                                            { value: 'selection', label: 'Selection' },
+                                            { value: 'none', label: 'None' }
+                                        ]
+                                    }
+                                }
+                            },
+                            {
                                 ...numberField('min-width-expanded', 'Min width expanded', 'px')
                             },
                             {

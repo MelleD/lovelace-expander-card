@@ -19,7 +19,8 @@
             'max-width-expanded': 0,
             'icon': 'mdi:chevron-down',
             'icon-rotate-degree': '180deg',
-            'animation': true
+            'animation': true,
+            'haptic': 'light' as const
         };
         import { loadExpanderCardEditor } from './ExpanderCardEditor';
 </script>
@@ -345,7 +346,9 @@
 
     const touchEndAction = (event: TouchEvent) => {
         if (!isScrolling && touchElement === event.target && config['title-card-clickable']) {
-            forwardHaptic(touchElement, 'light');
+            if (config.haptic && config.haptic !== 'none') {
+                forwardHaptic(touchElement, config.haptic);
+            }
             toggleOpen();
             touchPreventClick = true;
             // A touch event may not always be followed by a click event so we set a timeout to reset
@@ -504,7 +507,9 @@
 
     const buttonClick = (event: MouseEvent) => {
         if (!touchPreventClick) {
-            forwardHaptic(event.currentTarget as HTMLElement, 'light');
+            if (config.haptic && config.haptic !== 'none') {
+                forwardHaptic(event.currentTarget as HTMLElement, config.haptic);
+            }
             toggleOpen();
             return undefined;
         }
