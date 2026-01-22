@@ -82,7 +82,7 @@ jobs:
 
       - name: "Notify issues of release their fix is contained in"
         if: ${{ !github.event.inputs.prerelease }}
-        uses: apexskier/github-release-commenter@3bd413ad5e1d603bfe2282f9f06f2bdcec079327 # v1.3.6
+        uses: apexskier/github-release-commenter@e7813a9625eabd79a875b4bc4046cfcae377ab34 # v1.4.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           comment-template: |
