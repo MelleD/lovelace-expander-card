@@ -693,6 +693,8 @@
         color: var(--header-color,#fff);
         cursor: pointer;
         position: relative;
+        font-family: var(--ha-font-family-body);
+        font-size: var(--ha-font-size-m);
     }
     .header-overlay {
         position: absolute;
