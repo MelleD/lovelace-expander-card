@@ -25,7 +25,17 @@ You can do advanced styling using the `style` configuration parameter. The `styl
 style:
   .expander-card:
     background-color: red
-    padding: 1em
+```
+
+### Object returned from template
+
+```yaml
+templates:
+  - template: style
+    value_template: |
+      [[[ 
+        return { '.expander-card': { 'background-color': 'red !important' } }
+      ]]]
 ```
 
 Both formats produce the same result. See [Styling Examples](styling-examples.md) for more details and comprehensive examples.
