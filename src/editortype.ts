@@ -34,9 +34,16 @@ export const expanderCardEditorTemplates = [
     'style'
 ];
 
+export enum StyleSchemaTypes {
+    CSS = 'css',
+    Object = 'object'
+}
+
+export const styleSchemaCSS = { name: 'style', label: 'CSS text', selector: { text: { multiline: true } } };
+export const styleSchemaObject = { name: 'style', label: 'CSS structured object', selector: { object: {} } };
+
 const iconSelector = { icon: {} };
 const textSelector = { text: {} };
-const multilineTextSelector = { text: { multiline: true } };
 const booleanSelector = { boolean: {} };
 const numberSelector = (unit_of_measurement: string) => ({
     number: {
@@ -54,12 +61,6 @@ const textField = (name: string, label: string) => ({
     name,
     label,
     selector: textSelector
-});
-
-const multilineTextField = (name: string, label: string) => ({
-    name,
-    label,
-    selector: multilineTextSelector
 });
 
 const booleanField = (name: string, label: string) => ({
@@ -288,11 +289,7 @@ export const ExpanderCardEditorSchema = [
                 type: 'expandable',
                 label: 'Advanced styling',
                 icon: 'mdi:brush-outline',
-                schema: [
-                    {
-                        ...multilineTextField('style', 'Custom CSS style')
-                    }
-                ]
+                schema: ['[[style]]'] // to be populated dynamically
             },
             {
                 type: 'expandable',

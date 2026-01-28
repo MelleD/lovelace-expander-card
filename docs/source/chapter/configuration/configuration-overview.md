@@ -36,6 +36,9 @@ All configurations are available for editing in Graphical config editor. Config 
 |show-button-users|object[]|**optional**|*|Choose the persons/users that button is visible to them.|
 |start-expanded-users|object[]|**optional**|*|Choose the persons/users that card will be start expanded for them.|
 |cards|object[]|**optional**|LovelaceCardConfig[]|Child cards to show when expanded|
-|style :octicons-project-template-24:|string|**optional**.|css style rules|Advanced css styling rules. if you wish to style/hide the hover/press ripple of the expander-card button you can use advanced styling. See [Hover/press ripple](../style/hover.md).|
+|style :octicons-project-template-24:|string or object|**optional**|css style rules or structured style object|Advanced css styling rules. Supports string format (CSS text) or object format (structured with selectors as keys and property string arrays as values). See [Style](../style/style.md) and [Styling Examples](../style/styling-examples.md).|
 |variables|dictionary|**optional**|List|See Advanced javascript templates|
 |templates|dictionary|**optional**|List|See Advanced javascript templates|
+
+!!! tip "Editing `style` in Graphical config editor"
+    When editing `style` in Graphical config editor the default mode is CSS text. To enabled Structured object editing, switch to code editor mode, set style to be a YAML object, and switch back to visual editor mode. Your config will now always view as an Structured object in the visual editor.

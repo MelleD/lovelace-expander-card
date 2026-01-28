@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ExpanderCardEditorNulls, ExpanderCardEditorSchema, expanderCardEditorTemplates } from './editortype';
+import { ExpanderCardEditorNulls, ExpanderCardEditorSchema, expanderCardEditorTemplates, styleSchemaCSS, styleSchemaObject, StyleSchemaTypes } from './editortype';
 import { showTitleCardEditFormDialog, TitleCardEditFormParams } from './title-card/showTitleCardEditForm';
 import { HomeAssistantUser } from './types';
 
@@ -65,6 +65,10 @@ const loader = async (): Promise<any> => {
                 expanderCardEditorTemplates
                     .filter((t: any) => !this._config.templates?.some((ct: any) => ct.template === t))
                     .join('","'));
+            // populate advanced styling schema
+            const styleSchemaType: StyleSchemaTypes = this._config.style && typeof this._config.style === 'object' ? StyleSchemaTypes.Object : StyleSchemaTypes.CSS;
+            const styleSchema = styleSchemaType === StyleSchemaTypes.CSS ? JSON.stringify(styleSchemaCSS) : JSON.stringify(styleSchemaObject);
+            populatedSchemaJSON = populatedSchemaJSON.replace(/"\[\[style\]\]"/g, styleSchema); // NOSONAR es2019
             const populatedSchema = JSON.parse(populatedSchemaJSON);
             return populatedSchema;
         }
