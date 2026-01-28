@@ -3,7 +3,7 @@
 You can do advanced styling using the `style` configuration parameter. The `style` parameter supports two formats:
 
 1. **String format**: CSS rules as a string
-2. **Object format**: Structured object with CSS selectors as keys and property objects as values
+2. **Object format**: Structured object with CSS selectors as keys and property string arrays as values
 
 !!! tip "Editing `style` in Graphical config editor"
     When editing `style` in Graphical config editor the default mode is CSS text. To enabled Structured object editing, switch to code editor mode, set style to be a YAML object, and switch back to visual editor mode. Your config will now always view as an Structured object in the visual editor.
@@ -24,21 +24,32 @@ You can do advanced styling using the `style` configuration parameter. The `styl
 ```yaml
 style:
   .expander-card:
-    background-color: red
+    - background-color: red
 ```
 
+Both formats produce the same result. See [Styling Examples](styling-examples.md) for more details and comprehensive examples.
+
 ### Object returned from template
+
+Templates can return either string arrays or object arrays where the first object only is used:
 
 ```yaml
 templates:
   - template: style
     value_template: |
       [[[ 
-        return { '.expander-card': { 'background-color': 'red !important' } }
+        return { 
+          '.expander-card': [
+            'background-color: red !important',
+            'padding: 1em'
+          ],
+          '.header > .title': [
+            { 'color': 'white' },
+            { 'font-size': 'var(--ha-font-size-l)' }
+          ]
+        }
       ]]]
 ```
-
-Both formats produce the same result. See [Styling Examples](styling-examples.md) for more details and comprehensive examples.
 
 ## CSS Classes
 

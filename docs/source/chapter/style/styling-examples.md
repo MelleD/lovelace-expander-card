@@ -27,18 +27,18 @@ cards:
 
 ### Object Format (Structured)
 
-Alternatively, you can use an object structure where keys are CSS selectors and values are objects containing CSS properties:
+Alternatively, you can use an object structure where keys are CSS selectors and values are arrays of property strings:
 
 ```yaml
 type: custom:expander-card
 title: Object Style Example
 style:
   .expander-card:
-    background-color: red
-    padding: 1em
+    - background-color: red
+    - padding: 1em
   .header > .title:
-    font-size: var(--ha-font-size-l)
-    color: green
+    - font-size: var(--ha-font-size-l)
+    - color: green
 cards:
   - type: entity
     entity: light.living_room
@@ -261,24 +261,24 @@ type: custom:expander-card
 title: Complex Styling Example
 style:
   .expander-card.animation.open, .expander-card.animation.opening:
-    background-color: '#1e3a8a'
-    transition: background-color 0.35s ease
+    - background-color: '#1e3a8a'
+    - transition: background-color 0.35s ease
   .expander-card.animation.close, .expander-card.animation.closing:
-    background-color: '#047857'
-    transition: background-color 0.35s ease
+    - background-color: '#047857'
+    - transition: background-color 0.35s ease
   .header > .title:
-    font-size: var(--ha-font-size-l)
-    color: '#ffffff'
-    font-weight: bold
-    transition: color 0.35s ease, font-size 0.35s ease
+    - font-size: var(--ha-font-size-l)
+    - color: '#ffffff'
+    - font-weight: bold
+    - transition: color 0.35s ease, font-size 0.35s ease
   .header.animation.open > .title, .header.animation.opening > .title:
-    color: '#fbbf24'
-    font-size: var(--ha-font-size-xl)
+    - color: '#fbbf24'
+    - font-size: var(--ha-font-size-xl)
   .header.animation.close > .title, .header.animation.closing > .title:
-    color: '#ffffff'
-    font-size: var(--ha-font-size-l)
+    - color: '#ffffff'
+    - font-size: var(--ha-font-size-l)
   .arrow:
-    color: '#fbbf24'
+    - color: '#fbbf24'
 cards:
   - type: entity
     entity: light.living_room

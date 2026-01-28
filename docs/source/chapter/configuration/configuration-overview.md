@@ -36,7 +36,7 @@ All configurations are available for editing in Graphical config editor. Config 
 |show-button-users|object[]|**optional**|*|Choose the persons/users that button is visible to them.|
 |start-expanded-users|object[]|**optional**|*|Choose the persons/users that card will be start expanded for them.|
 |cards|object[]|**optional**|LovelaceCardConfig[]|Child cards to show when expanded|
-|style :octicons-project-template-24:|string or object|**optional**|css style rules or structured style object|Advanced css styling rules. Supports string format (CSS text) or object format (structured with selectors as keys). See [Style](../style/style.md) and [Styling Examples](../style/styling-examples.md).|
+|style :octicons-project-template-24:|string or object|**optional**|css style rules or structured style object|Advanced css styling rules. Supports string format (CSS text) or object format (structured with selectors as keys and property string arrays as values). See [Style](../style/style.md) and [Styling Examples](../style/styling-examples.md).|
 |variables|dictionary|**optional**|List|See Advanced javascript templates|
 |templates|dictionary|**optional**|List|See Advanced javascript templates|
 

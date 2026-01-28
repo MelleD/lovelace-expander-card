@@ -52,7 +52,7 @@ export interface ExpanderConfig {
     animation?: boolean;
     haptic?: 'success' | 'warning' | 'failure' | 'light' | 'medium' | 'heavy' | 'selection' | 'none';
     'expander-card-id'?: string;
-    style?: string | Record<string, Record<string, string>>;
+    style?: string | Record<string, (string | Record<string, string>)[]>;
     variables?: Record<string, ExpanderCardVariables>;
     templates?: Record<string, ExpanderCardTemplates>;
 }
