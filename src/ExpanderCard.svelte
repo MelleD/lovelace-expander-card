@@ -61,6 +61,7 @@
     import { isJSTemplate, getJSTemplateRenderer, trackJSTemplate, setJSTemplateRef, trackJSTemplateEvent } from './helpers/templates';
     import type { HomeAssistantJavaScriptTemplatesRenderer } from 'home-assistant-javascript-templates';
     import { getDashboardRawConfig } from './helpers/raw-config';
+    import { styleToString } from './helpers/style-converter';
 
     const {
         hass,
@@ -88,9 +89,26 @@
     const templateValues: Record<string, unknown> = $state({});
     let dashboardRawConfig: ExpanderCardRawConfig = $state( getDashboardRawConfig() );
 
-    const userStyleTemplateOrConfig: string | null = $derived(templateValues.style !== undefined ?
-        `<style>${String(templateValues.style)}</style>` :
-        (config.style ? `<style>${config.style}</style>` : null));
+    const userStyleTemplateOrConfig: string | null = $derived.by(() => {
+        const templateStyle = templateValues.style;
+        const configStyle = config.style;
+
+        let styleString: string | null = null;
+
+        if (templateStyle !== undefined) {
+            // Handle templateValues.style - could be string or object
+            styleString = typeof templateStyle === 'string'
+                ? templateStyle
+                : (typeof templateStyle === 'object' && templateStyle !== null)
+                    ? styleToString(templateStyle as Record<string, Record<string, string>>)
+                    : String(templateStyle);
+        } else if (configStyle) {
+            // Handle config.style - could be string or object
+            styleString = styleToString(configStyle);
+        }
+
+        return styleString ? `<style>${styleString}</style>` : null;
+    });
     const iconConfigOrTemplate: string | undefined = $derived(
         templateValues.icon !== undefined ?
             String(templateValues.icon) :

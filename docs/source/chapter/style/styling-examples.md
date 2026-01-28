@@ -4,6 +4,48 @@ This page provides practical examples of styling the Expander Card using the `st
 
 These examples demonstrate various styling techniques, from simple color changes to complex animations and layout modifications. Understanding these patterns will help you create custom designs that perfectly match your dashboard.
 
+## Style Format
+
+The `style` configuration parameter supports two formats:
+
+### String Format (CSS Text)
+
+The traditional way to define styles using a string containing CSS rules:
+
+```yaml
+type: custom:expander-card
+title: String Style Example
+style: |
+  .expander-card {
+    background-color: red;
+    padding: 1em;
+  }
+cards:
+  - type: entity
+    entity: light.living_room
+```
+
+### Object Format (Structured)
+
+Alternatively, you can use an object structure where keys are CSS selectors and values are objects containing CSS properties:
+
+```yaml
+type: custom:expander-card
+title: Object Style Example
+style:
+  .expander-card:
+    background-color: red
+    padding: 1em
+  .header > .title:
+    font-size: var(--ha-font-size-l)
+    color: green
+cards:
+  - type: entity
+    entity: light.living_room
+```
+
+Both formats produce the same result. The object format can be more readable and easier to maintain for complex styles.
+
 ## Background Color Transitions
 
 ### Animated Background Based on State
@@ -43,6 +85,21 @@ style: |
   .header.animation.closing {
     background-color: #C8A2C8 !important;
   }
+cards:
+  - type: entity
+    entity: light.bedroom
+```
+
+The same example using the object format:
+
+```yaml
+type: custom:expander-card
+title: Button Background (Object Format)
+style:
+  .header.animation.open, .header.animation.opening:
+    background-color: red !important
+  .header.animation.close, .header.animation.closing:
+    background-color: '#C8A2C8 !important'
 cards:
   - type: entity
     entity: light.bedroom
@@ -195,7 +252,54 @@ cards:
       - sensor.humidity
 ```
 
+## Complex Example Using Object Format
+
+Here's a comprehensive example demonstrating the object format with multiple selectors and properties:
+
+```yaml
+type: custom:expander-card
+title: Complex Styling Example
+style:
+  .expander-card.animation.open, .expander-card.animation.opening:
+    background-color: '#1e3a8a'
+    transition: background-color 0.35s ease
+  .expander-card.animation.close, .expander-card.animation.closing:
+    background-color: '#047857'
+    transition: background-color 0.35s ease
+  .header > .title:
+    font-size: var(--ha-font-size-l)
+    color: '#ffffff'
+    font-weight: bold
+    transition: color 0.35s ease, font-size 0.35s ease
+  .header.animation.open > .title, .header.animation.opening > .title:
+    color: '#fbbf24'
+    font-size: var(--ha-font-size-xl)
+  .header.animation.close > .title, .header.animation.closing > .title:
+    color: '#ffffff'
+    font-size: var(--ha-font-size-l)
+  .arrow:
+    color: '#fbbf24'
+cards:
+  - type: entity
+    entity: light.living_room
+```
+
+This example demonstrates:
+
+- Background color transitions between states
+- Title color and size changes with smooth transitions
+- Custom arrow color
+- Multiple CSS properties per selector
+- Combining multiple selectors with commas
+
 ## Tips and Best Practices
+
+### Style Format Choice
+
+Choose the format that works best for your use case:
+
+- **String format**: Better for copy-pasting existing CSS or when using complex selectors
+- **Object format**: More readable and easier to maintain, especially for configurations with many style rules
 
 ### Specificity
 
