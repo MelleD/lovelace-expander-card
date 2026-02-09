@@ -96,7 +96,6 @@ limitations under the License.
             el.style.setProperty('--ha-card-box-shadow', 'none');
             el.style.setProperty('--ha-card-border-color', 'transparent');
             el.style.setProperty('--ha-card-border-width', '0px');
-            el.style.setProperty('--ha-card-border-radius', '0px');
             el.style.setProperty('--ha-card-backdrop-filter', 'none');
         }
 
