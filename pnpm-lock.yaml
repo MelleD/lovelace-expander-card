@@ -28,8 +28,8 @@ importers:
         specifier: ^9.39.1
         version: 9.39.2
       '@stylistic/eslint-plugin':
-        specifier: ^5.7.0
-        version: 5.8.0(eslint@9.39.2)
+        specifier: ^5.9.0
+        version: 5.9.0(eslint@9.39.2)
       '@sveltejs/adapter-node':
         specifier: ^5.5.3
         version: 5.5.3(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.1))(svelte@5.53.3)(vite@6.4.1))
@@ -1022,11 +1022,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@stylistic/eslint-plugin@5.8.0':
-    resolution: {integrity: sha512-WNPVF/FfBAjyi3OA7gok8swRiImNLKI4dmV3iK/GC/0xSJR7eCzBFsw9hLZVgb1+MYNLy7aDsjohxN1hA/FIfQ==}
+  '@stylistic/eslint-plugin@5.9.0':
+    resolution: {integrity: sha512-FqqSkvDMYJReydrMhlugc71M76yLLQWNfmGq+SIlLa7N3kHp8Qq8i2PyWrVNAfjOyOIY+xv9XaaYwvVW7vroMA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      eslint: '>=9.0.0'
+      eslint: ^9.0.0 || ^10.0.0
 
   '@sveltejs/acorn-typescript@1.0.9':
     resolution: {integrity: sha512-lVJX6qEgs/4DOcRTpo56tmKzVPtoWAaVbL4hfO7t7NVwl9AAXzQR6cihesW1BmNMPl+bK6dreu2sOKBP2Q9CIA==}
@@ -1127,10 +1127,6 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.0.0'
-
-  '@typescript-eslint/types@8.55.0':
-    resolution: {integrity: sha512-ujT0Je8GI5BJWi+/mMoR0wxwVEQaxM+pi30xuMiJETlX80OPovb2p9E8ss87gnSVtYXtJoU9U1Cowcr6w2FE0w==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/types@8.56.1':
     resolution: {integrity: sha512-dbMkdIUkIkchgGDIv7KLUpa0Mda4IYjo4IAMJUZ+3xNoUXxMsk9YtKpTHSChRS85o+H9ftm51gsK1dZReY9CVw==}
@@ -2867,10 +2863,10 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.57.1':
     optional: true
 
-  '@stylistic/eslint-plugin@5.8.0(eslint@9.39.2)':
+  '@stylistic/eslint-plugin@5.9.0(eslint@9.39.2)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.2)
-      '@typescript-eslint/types': 8.55.0
+      '@typescript-eslint/types': 8.56.1
       eslint: 9.39.2
       eslint-visitor-keys: 4.2.1
       espree: 10.4.0
@@ -3016,8 +3012,6 @@ snapshots:
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
-
-  '@typescript-eslint/types@8.55.0': {}
 
   '@typescript-eslint/types@8.56.1': {}
 
