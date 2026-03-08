@@ -100,8 +100,9 @@ export class TitleCardEditForm extends LitElement {
             @keydown=${this._ignoreKeydown.bind(this)}
             @closed=${ this._cancel.bind(this) }
             .heading=${heading}
+            .width=${this.large ? 'full' : 'large'}
         >
-            <ha-dialog-header slot="heading">
+            <ha-dialog-header slot="header">
                 <ha-icon-button
                     slot="navigationIcon"
                     dialogAction="cancel"
@@ -112,23 +113,26 @@ export class TitleCardEditForm extends LitElement {
                 <span slot="title" @click=${this._enlarge.bind(this)}>${heading}</span>
             </ha-dialog-header>
             ${this._renderCardEditor()}
-            <div slot="primaryAction" @click=${this._submit.bind(this)}>
-                <ha-button
-                    appearance="plain"
-                    size="small"
-                    @click=${this._cancel.bind(this)}
-                    dialogInitialFocus
-                >
-                    ${this._params.cancelText || this.hass.localize('ui.common.cancel')}
-                </ha-button>
-                <ha-button
-                    size="small"
-                    @click=${this._submit.bind(this)} 
-                    disabled=${ifDefined(disableSave)}
-                >
-                    ${this._params.submitText || this.hass.localize('ui.common.save')}
-                </ha-button>
-            </div>
+            <ha-dialog-footer slot="footer">
+                <div slot="primaryAction" @click=${this._submit.bind(this)}>
+                    <ha-button
+                        appearance="plain"
+                        size="small"
+                        @click=${this._cancel.bind(this)}
+                        dialogInitialFocus
+                    >
+                        ${this._params.cancelText || this.hass.localize('ui.common.cancel')}
+                    </ha-button>
+                    <ha-button
+                        size="small"
+                        @click=${this._submit.bind(this)} 
+                        disabled=${ifDefined(disableSave)}
+                    >
+                        ${this._params.submitText || this.hass.localize('ui.common.save')}
+                    </ha-button>
+                </div>
+                ${this._renderCardEditorActions()}
+            </ha-dialog-footer>
         </ha-dialog>
         `;
     }
@@ -212,7 +216,6 @@ export class TitleCardEditForm extends LitElement {
                     ${cardRenderBlurSpinner}
                 </div>
             </div>
-            ${this._renderCardEditorActions()}
             `
             : html`
             <hui-card-picker
@@ -231,49 +234,54 @@ export class TitleCardEditForm extends LitElement {
             :host {
                 --code-mirror-max-height: calc(100vh - 176px);
             }
+
             ha-dialog {
-                --mdc-dialog-max-width: 100px;
                 --dialog-z-index: 6;
-                --mdc-dialog-max-width: 90vw;
-                --dialog-content-padding: 24px 12px;
+                --dialog-content-padding: var(--ha-space-2);
             }
+
             .content {
-                width: calc(90vw - 48px);
-                max-width: 1000px;
+                width: 100%;
+                max-width: 100%;
             }
+
             @media all and (max-width: 450px), all and (max-height: 500px) {
-                /* overrule the ha-style-dialog max-height on small screens */
-                ha-dialog {
-                    height: 100%;
-                    --mdc-dialog-max-height: 100%;
-                    --dialog-surface-top: 0px;
-                    --mdc-dialog-max-width: 100vw;
-                }
+            /* overrule the ha-style-dialog max-height on small screens */
                 .content {
                     width: 100%;
                     max-width: 100%;
                 }
             }
+
             @media all and (min-width: 451px) and (min-height: 501px) {
                 :host([large]) .content {
                     max-width: none;
                 }
             }
+
+            .center {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
             .content {
                 display: flex;
                 flex-direction: column;
-                gap: 24px;
             }
+
             .content hui-card {
                 display: block;
                 padding: 4px;
                 margin: 0 auto;
                 max-width: 390px;
             }
-            .content .element-editor {
-                margin: 0 10px;
+            .content hui-section {
+                display: block;
+                padding: 4px;
+                margin: 0 auto;
+                max-width: var(--ha-view-sections-column-max-width, 500px);
             }
-            .content .element-preview {
+            .content .element-editor {
                 margin: 0 10px;
             }
 
@@ -292,8 +300,10 @@ export class TitleCardEditForm extends LitElement {
                     margin: auto 0px;
                     max-width: 500px;
                 }
-                .content .element-preview {
-                    margin: unset;
+                .content hui-section {
+                    padding: 8px 10px;
+                    margin: auto 0px;
+                    max-width: var(--ha-view-sections-column-max-width, 500px);
                 }
             }
             .hidden {
@@ -336,6 +346,9 @@ export class TitleCardEditForm extends LitElement {
                 gap: var(--ha-space-2);
                 display: flex;
                 margin-left: 0px;
+                margin-right: auto;
+                margin-inline-end: auto;
+                margin-inline-start: initial;
             }
             [slot="navigationIcon"] {
                 --ha-icon-display: block;
