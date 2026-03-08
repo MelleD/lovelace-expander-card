@@ -3,5 +3,5 @@
     "content_in_root": false,
     "render_readme": true,
     "filename": "expander-card.js",
-    "homeassistant": "2025.10.0b0"
+    "homeassistant": "2025.3.0"
 }
