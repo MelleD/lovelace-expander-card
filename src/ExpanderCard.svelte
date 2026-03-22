@@ -74,7 +74,7 @@
 
     let open = $state(untrack(() => preview) ? true : false);
     let previewState = $state(untrack(() => preview) ? true : false);
-    let showButtonUsers = $state(true);
+    let showButtonUsers = $state(untrack(() => preview || (userInList(config['show-button-users']) ?? true)));
     let animationState: AnimationState = $state<AnimationState>('idle');
     let animationTimeout: ReturnType<typeof setTimeout> | null = $state(null);
     let backgroundAnimationDuration = $state(0);
@@ -123,7 +123,6 @@
             config['arrow-color']);
     const configId = untrack(() => config['storage-id']);
     const lastStorageOpenStateId = 'expander-open-' + configId;
-    showButtonUsers = untrack(() => preview || (userInList(config['show-button-users']) ?? true));
 
     $effect(() => {
         // effect for template 'expanded'. We untrack preview and open to avoid infinite loop effect loops.
