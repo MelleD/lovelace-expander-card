@@ -12,7 +12,7 @@ This is a Home Assistant Lovelace Custom Card (lovelace-expander-card). It adds 
 - Keep components small and composable; prefer <200 lines per .svelte file when practical.
 - Use TypeScript everywhere: Define interfaces for props like `cardConfig: LovelaceCardConfig`.
 - Format with Prettier + prettier-plugin-svelte: No indentation inside <script> and <style> tags.
-- Avoid DOM manipulation; use Svelte transitions and actions.
+- Avoid manual DOM manipulation in Svelte components; prefer Svelte transitions and actions. When DOM access is required for Home Assistant web component interop (e.g., `hui-card`), use it sparingly, document/justify it in comments, and keep the logic minimal.
 
 ## Home Assistant Integration
 - Type props as `HassEntity` or `LovelaceCardConfig`.
