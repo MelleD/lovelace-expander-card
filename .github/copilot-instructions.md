@@ -16,7 +16,7 @@ This is a Home Assistant Lovelace Custom Card (lovelace-expander-card). It adds 
 
 ## Home Assistant Integration
 - Type props using real HA types such as `HomeAssistant` and `LovelaceCardConfig`.
-- Use `ha-card`, `ha-icon`, `ha-switch` from HA components—import via `home-assistant-frontend`.
+- Use `ha-card`, `ha-icon`, `ha-switch` as Home Assistant web components provided at runtime (no `home-assistant-frontend` import in this project).
 - Update states reactively with `hass.states[entity_id]` via $derived.
 - Support YAML config: Validate `config.expanded` as boolean.
 - No global state; keep everything local per card.
