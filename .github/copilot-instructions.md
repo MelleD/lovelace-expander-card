@@ -9,7 +9,7 @@ This is a Home Assistant Lovelace Custom Card (lovelace-expander-card). It adds 
 
 ## Code Style & Best Practices
 - Use Svelte 5 Runes ($state, $derived, $effect) for all reactive state—no legacy Svelte 4 stores.
-- Keep components small and composable; max 200 lines per .svelte file.
+- Keep components small and composable; prefer <200 lines per .svelte file when practical.
 - Use TypeScript everywhere: Define interfaces for props like `cardConfig: LovelaceCardConfig`.
 - Format with Prettier + svelte-prettier-plugin: No indentation inside <script> and <style> tags.
 - Avoid DOM manipulation; use Svelte transitions and actions.
