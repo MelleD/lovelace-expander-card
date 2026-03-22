@@ -29,7 +29,7 @@ This is a Home Assistant Lovelace Custom Card (lovelace-expander-card). It adds 
 
 ## Security & HA Standards
 - Validate all config user inputs (sanitize HTML if needed).
-- No eval() or innerHTML without DOMPurify.
+- Avoid `eval()` and avoid `innerHTML`/Svelte `{@html}` wherever possible; if rendering HTML is unavoidable, add DOMPurify as a dependency and sanitize all HTML before use.
 - Handle `hass.user.is_admin` for advanced features.
 
 ## Review Style
