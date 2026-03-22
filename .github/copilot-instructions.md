@@ -15,7 +15,7 @@ This is a Home Assistant Lovelace Custom Card (lovelace-expander-card). It adds 
 - Avoid manual DOM manipulation in Svelte components; prefer Svelte transitions and actions. When DOM access is required for Home Assistant web component interop (e.g., `hui-card`), use it sparingly, document/justify it in comments, and keep the logic minimal.
 
 ## Home Assistant Integration
-- Type props as `HassEntity` or `LovelaceCardConfig`.
+- Type props using real HA types such as `HomeAssistant` and `LovelaceCardConfig`.
 - Use `ha-card`, `ha-icon`, `ha-switch` from HA components—import via `home-assistant-frontend`.
 - Update states reactively with `hass.states[entity_id]` via $derived.
 - Support YAML config: Validate `config.expanded` as boolean.
