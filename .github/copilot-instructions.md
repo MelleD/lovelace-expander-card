@@ -23,7 +23,7 @@ This is a Home Assistant Lovelace Custom Card (lovelace-expander-card). It adds 
 
 ## Performance & Accessibility
 - Memoize expensive computations with $derived.
-- Avoid unnecessary re-renders: Use `| $` for runes in templates.
+- Avoid unnecessary re-renders: Keep runes in `<script>` (`$state`, `$derived`, `$effect`) and reference the resulting values directly in markup.
 - Add ARIA attributes: `aria-expanded`, `role="button/region"`.
 - Lazy-load icons and styles only when needed.
 
