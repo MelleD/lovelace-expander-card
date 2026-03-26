@@ -64,7 +64,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: docs/site
-      - uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v5
 
       - name: "Create Github release (full)"
         uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe #v2
