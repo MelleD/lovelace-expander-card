@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name:  Checkout configuration
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #6.0.2
         # Hier wird bewusst main ausgecheckt für die Config-Datei
         
       - name: Label issues
-        uses: github/issue-labeler@v3.4
+        uses: github/issue-labeler@c1b0f9f52a63158c4adc09425e858e87b32e9685 #3.4.0
         with:
           configuration-path: .github/labeler.yml
           include-title: 1
