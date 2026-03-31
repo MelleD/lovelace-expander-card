@@ -12,8 +12,8 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       home-assistant-query-selector:
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: ^6.0.1
+        version: 6.0.1(shadow-dom-selector@5.0.1)
       lit:
         specifier: ^3.3.2
         version: 3.3.2
@@ -1414,8 +1414,10 @@ packages:
   home-assistant-javascript-templates@6.0.1:
     resolution: {integrity: sha512-kbPS76MJx22Y8gwq+HwWUBlaxWDwiawoDl0LrgGvA0QM2+C+69a1YV7ccyMrqHtx+YTJ28mmhpBeq3h4GpanRw==}
 
-  home-assistant-query-selector@5.0.0:
-    resolution: {integrity: sha512-QY1tR1FNIDbHocw5GNuPfZzIXg/7x8lLt58fNGMNvZgCHCjasFsQ6vk93/Fq+8kBO+J/jc8YrziFVknTfvjwCw==}
+  home-assistant-query-selector@6.0.1:
+    resolution: {integrity: sha512-/0hkaT4Y4CouDsc4wJ90Eyguh4tvrOcTMQ8Q+EVQPRWZM0OZ1vx7cbOLUXfQhzy1AxI7Z9o6qRLefUh3qnoFSw==}
+    peerDependencies:
+      shadow-dom-selector: ^5.0.1
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
@@ -3230,7 +3232,7 @@ snapshots:
     dependencies:
       get-promisable-result: 1.0.2
 
-  home-assistant-query-selector@5.0.0:
+  home-assistant-query-selector@6.0.1(shadow-dom-selector@5.0.1):
     dependencies:
       shadow-dom-selector: 5.0.1
 
