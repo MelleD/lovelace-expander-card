@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       home-assistant-javascript-templates:
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^7.0.0
+        version: 7.0.0(get-promisable-result@1.0.2)
       home-assistant-query-selector:
         specifier: ^6.0.1
         version: 6.0.1(shadow-dom-selector@5.0.1)
@@ -1415,8 +1415,10 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
-  home-assistant-javascript-templates@6.0.1:
-    resolution: {integrity: sha512-kbPS76MJx22Y8gwq+HwWUBlaxWDwiawoDl0LrgGvA0QM2+C+69a1YV7ccyMrqHtx+YTJ28mmhpBeq3h4GpanRw==}
+  home-assistant-javascript-templates@7.0.0:
+    resolution: {integrity: sha512-p/KQtBjxLlYc5i4OpWB9m1mJRf45AKkUfUKWbAoABuptcRnmqvhrkDGF1N7WVTpXDNeFU6pyBYZbFiwnG1dOfw==}
+    peerDependencies:
+      get-promisable-result: ^1.0.2
 
   home-assistant-query-selector@6.0.1:
     resolution: {integrity: sha512-/0hkaT4Y4CouDsc4wJ90Eyguh4tvrOcTMQ8Q+EVQPRWZM0OZ1vx7cbOLUXfQhzy1AxI7Z9o6qRLefUh3qnoFSw==}
@@ -3238,7 +3240,7 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  home-assistant-javascript-templates@6.0.1:
+  home-assistant-javascript-templates@7.0.0(get-promisable-result@1.0.2):
     dependencies:
       get-promisable-result: 1.0.2
 
