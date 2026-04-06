@@ -2,6 +2,119 @@
 
 ## Title card
 
+This is the title card example from the video on the main page, a room card. 
+
+<img width="1032" height="280" alt="image" src="https://github.com/user-attachments/assets/afc16d00-1df8-490c-a57d-bdfb870bd797" />
+
+It requires [Mushroom Cards](https://github.com/piitaya/lovelace-mushroom), [Vertical Stack-in Card](https://github.com/ofekashery/vertical-stack-in-card), and (Lovelace card-mod)(https://github.com/thomasloven/lovelace-card-mod)
+
+```yaml
+  - type: custom:expander-card
+    child-margin-top: 0.6em
+    padding: 0
+    clear: true
+    title-card-button-overlay: true
+    title-card-clickable: true
+    expanded: true
+    title-card:
+      type: custom:vertical-stack-in-card
+      cards:
+        # --- TOP ROW ---
+        - type: horizontal-stack
+          cards:
+          
+            - type: custom:mushroom-template-card
+              primary: Living Room
+              icon: mdi:sofa
+              layout: vertical
+              card_mod:
+                style:
+                  mushroom-shape-icon$: |
+                    .shape {
+                      background: none !important;
+                      --shape-color: transparent !important;
+                    }
+                  .: |
+                    ha-card {
+                      background: none !important;
+                      border: none !important;
+                      box-shadow: none !important;
+                      /* This moves the entire card (icon + text) up by 6px */
+                      margin-top: -15px !important; 
+                    }
+                    mushroom-state-info {
+                      margin-top: -25px !important; /* Keeps the tight text-to-icon gap */
+                    }
+                    mushroom-state-item {
+                      gap: 0px !important;
+                    }
+                    :host {
+                      --mush-icon-size: 70px;
+                      --primary-text-color: white;
+                      --primary-font-weight: 660;
+                    }
+
+            - type: custom:mushroom-light-card
+              entity: light.fibaro_dimmer_2_living_room_spotlight
+              name: Lights
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                    /* Reduced from 35px to 18px */
+                    margin-top: 8px !important; 
+                    /* Ensures the card doesn't cut off the text */
+                    width: 100% !important;
+                  }
+              
+        # --- BOTTOM ROW (Chips) ---
+        - type: custom:mushroom-chips-card
+          alignment: center
+          chips:
+            - type: template
+              icon: mdi:thermometer
+              icon_color: orange
+              content: "21.71 °C"
+              card_mod:
+                style: |
+                  ha-card {
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: template
+              icon: mdi:water-percent
+              icon_color: blue
+              content: "44.89 %"
+              card_mod:
+                style: |
+                  ha-card {
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: template
+              icon: mdi:gauge
+              icon_color: red
+              content: "974.3 hPa"
+              card_mod:
+                style: |
+                  ha-card {
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: template
+              icon: mdi:flash
+              icon_color: yellow
+              content: "357 W"
+              card_mod:
+                style: |
+                  ha-card {
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+```
+
 Example title card that is clickable and has 2 nested cards, which is directly expanded
 
 ```yaml
