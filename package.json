@@ -48,9 +48,6 @@
         "svelte": "5.55.1"
     },
     "pnpm": {
-        "ignoredBuiltDependencies": [
-            "@sveltejs/kit"
-        ],
         "onlyBuiltDependencies": [
             "esbuild",
             "sharp"
