@@ -34,7 +34,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320
+      - uses: pnpm/action-setup@08c4be7e2e672a47d11bd04269e27e5f3e8529cb
         name: Install pnpm
         with:
           version: 9
