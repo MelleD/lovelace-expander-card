@@ -50,6 +50,10 @@
     "pnpm": {
         "ignoredBuiltDependencies": [
             "@sveltejs/kit"
+        ],
+        "onlyBuiltDependencies": [
+            "esbuild",
+            "sharp"
         ]
     }
 }
