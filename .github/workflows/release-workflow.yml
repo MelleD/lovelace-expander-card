@@ -45,7 +45,7 @@ jobs:
             node-version: 24
             cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Set app version (Unix)
         run: npm version ${{ github.event.inputs.release_version }} --no-git-tag-version
