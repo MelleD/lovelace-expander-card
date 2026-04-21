@@ -65,9 +65,9 @@ function eventHandler(templatesRenderer: Promise<HomeAssistantJavaScriptTemplate
 export function trackJSTemplateEvent(
     templatesRenderer: Promise<HomeAssistantJavaScriptTemplatesRenderer>,
     eventName: string): () => void {
-    const boundEventHandler = eventHandler.bind(null, templatesRenderer);
-    document.addEventListener(eventName, boundEventHandler as EventListener);
+    const boundEventHandler: EventListener = eventHandler.bind(null, templatesRenderer);
+    document.addEventListener(eventName, boundEventHandler);
     return () => {
-        document.removeEventListener(eventName, boundEventHandler as EventListener);
+        document.removeEventListener(eventName, boundEventHandler);
     };
 }
