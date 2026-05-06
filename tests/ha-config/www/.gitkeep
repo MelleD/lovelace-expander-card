@@ -1,2 +1,3 @@
-# expander-card.js is copied here from dist/ by tests/conftest.py at test startup.
+# expander-card.js is made available here for tests by the Home Assistant test container/plugin setup
+# (see plugins.yaml), rather than being copied by tests/conftest.py.
 # Do not commit expander-card.js — it is a build artifact (see .gitignore).
