@@ -67,11 +67,10 @@ def test_scenario(
     scenario = _SCENARIO_MAP[scenario_id]
     theme = scenario.get("theme")
 
-    push_scenario(ha, ha_lovelace_url_path, scenario)
-    if theme:
-        set_theme(ha, theme)
-
     try:
+        push_scenario(ha, ha_lovelace_url_path, scenario)
+        if theme:
+            set_theme(ha, theme)
         run_interactions(ha_page, scenario, ha=ha, key="setup")
         goto_scenario(ha_page, ha_url, ha_lovelace_url_path, scenario["view_path"])
         run_interactions(ha_page, scenario, ha=ha)

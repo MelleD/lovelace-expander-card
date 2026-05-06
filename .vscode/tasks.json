@@ -10,7 +10,7 @@
     {
       "label": "Python: Set up virtual environment",
       "type": "shell",
-      "command": "python3 -m venv .venv && source .venv/bin/activate && pip install -e '.[test]' && playwright install chromium",
+      "command": "python3 -m venv .venv && .venv/bin/pip install -e '.[test]' && .venv/bin/playwright install chromium",
       "problemMatcher": [],
       "presentation": {
         "panel": "dedicated",
@@ -30,7 +30,7 @@
     {
       "label": "HA: Start persistent server",
       "type": "shell",
-      "command": "source .venv/bin/activate && HA_CONFIG_PATH=tests/ha-config HA_PLUGINS_YAML=tests/plugins.yaml python -m ha_testcontainer.ha_server",
+      "command": "HA_CONFIG_PATH=tests/ha-config HA_PLUGINS_YAML=tests/plugins.yaml .venv/bin/python -m ha_testcontainer.ha_server",
       "isBackground": true,
       "problemMatcher": {
         "owner": "ha-server",
@@ -53,17 +53,17 @@
     // -------------------------------------------------------------------------
     // pytest — visual / integration tests
     //
-    // Each task activates the .venv virtual environment and sources .ha_env
-    // (if present) before running so that a pre-running HA instance started by
+    // Each task uses the .venv binaries directly and loads .ha_env (if present)
+    // before running so that a pre-running HA instance started by
     // "HA: Start persistent server" is used automatically — no Docker boot
-    // wait.  If .ha_env doesn't exist the source silently fails and pytest
+    // wait.  If .ha_env doesn't exist the dot-source silently fails and pytest
     // spins up a fresh container.
     // -------------------------------------------------------------------------
 
     {
       "label": "pytest: All tests",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -74,7 +74,7 @@
     {
       "label": "pytest: All tests (Update)",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 pytest tests/",
+      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -85,7 +85,7 @@
     {
       "label": "pytest: All scenarios",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/visual/test_scenarios.py",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -96,7 +96,7 @@
     {
       "label": "pytest: All scenarios (Update)",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py",
+      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -111,7 +111,7 @@
     {
       "label": "pytest: Run single scenario",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -122,7 +122,7 @@
     {
       "label": "pytest: Run single scenario — update (overwrite)",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -133,7 +133,7 @@
     {
       "label": "pytest: Run single doc image — generate / verify",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -144,7 +144,7 @@
     {
       "label": "pytest: Run single doc image — update (overwrite)",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -160,7 +160,7 @@
     {
       "label": "pytest: Doc images — generate / verify",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/visual/test_doc_images.py",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -171,7 +171,7 @@
     {
       "label": "pytest: Doc images — update all (overwrite)",
       "type": "shell",
-      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 pytest tests/visual/test_doc_images.py",
+      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -184,7 +184,7 @@
     {
       "label": "pytest: Doc image audit",
       "type": "shell",
-      "command": "source .venv/bin/activate && pytest tests/test_doc_audit.py",
+      "command": ".venv/bin/pytest tests/test_doc_audit.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {

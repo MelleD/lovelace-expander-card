@@ -10,6 +10,9 @@ requires-python = ">=3.11"
 [project.optional-dependencies]
 test = [
     "ha-testcontainer[test]>=2.1",
+    "pytest>=7.0",
+    "PyYAML>=6.0",
+    "playwright>=1.0",
 ]
 
 [tool.pytest.ini_options]
