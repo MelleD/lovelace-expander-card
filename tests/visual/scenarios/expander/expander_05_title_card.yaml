@@ -1,0 +1,31 @@
+id: expander_title_card
+description: "Expander card with a heading title-card replacing the text title"
+view_path: expander-title-card
+
+card:
+  type: custom:expander-card
+  title-card:
+    type: heading
+    heading: Lights
+    heading_style: title
+    icon: mdi:lightbulb
+  expanded: true
+  cards:
+    - type: entities
+      entities:
+        - light.bed_light
+
+assertions:
+  - type: element_present
+    root: expander-card
+    selector: ".children-container.open"
+
+  - type: snapshot
+    name: "expander_05_title_card"
+    threshold: 0.02
+
+doc_image:
+  output: docs/source/chapter/assets/expander-title-card.png
+  root: expander-card
+  padding: 8
+  threshold: 0.02

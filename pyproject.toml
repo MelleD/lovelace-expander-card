@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lovelace-expander-card"
+version = "0.0.1"
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+test = [
+    "ha-testcontainer[test]>=2.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

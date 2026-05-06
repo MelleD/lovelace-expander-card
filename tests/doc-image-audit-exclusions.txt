@@ -1,0 +1,21 @@
+# Doc image audit exclusions.
+#
+# Images listed here are intentionally hand-crafted and are NOT auto-generated
+# by a doc_image:/doc_animation: scenario.  One repo-relative path per line.
+# Lines starting with # and blank lines are ignored.
+#
+# To convert a hand-crafted image to an auto-generated one, add a
+# doc_image:/doc_animation: key to a scenario YAML and remove the entry here.
+
+# Existing hand-crafted assets committed before automated doc-image generation
+# was introduced.  These may be replaced with generated versions over time.
+docs/source/chapter/assets/example.gif
+docs/source/chapter/assets/lights_overlay_button.png
+docs/source/chapter/assets/nested.png
+docs/source/chapter/assets/clear_router.png
+docs/source/chapter/assets/editor.png
+docs/source/chapter/assets/logo.png
+docs/source/chapter/assets/pplogo.png
+docs/source/chapter/assets/styling1.png
+docs/source/chapter/assets/styling2.png
+docs/source/chapter/assets/styling3.png

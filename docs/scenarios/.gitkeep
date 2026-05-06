@@ -1,0 +1,5 @@
+# Documentation-asset-only scenarios.
+# Place YAML files here for scenarios that exist solely to generate doc images
+# or animations (no functional assertions).  These scenarios are picked up by
+# tests/visual/test_doc_images.py but are NOT run by test_scenarios.py.
+# See tests/visual/scenarios/ for scenarios that also include assertions.

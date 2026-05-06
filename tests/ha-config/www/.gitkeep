@@ -1,0 +1,2 @@
+# expander-card.js is copied here from dist/ by tests/conftest.py at test startup.
+# Do not commit expander-card.js — it is a build artifact (see .gitignore).

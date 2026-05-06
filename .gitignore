@@ -12,3 +12,12 @@ vite.config.ts.timestamp-*
 .venv
 .npm
 docs/site
+
+# Visual test artifacts
+tests/visual/snapshots/*.actual.png
+tests/ha-config/www/expander-card.js
+.ha_env
+__pycache__/
+*.pyc
+.pytest_cache/
+src/*.egg-info/
