@@ -53,6 +53,11 @@
     // -------------------------------------------------------------------------
     // pytest — visual / integration tests
     //
+    // NOTE: These tasks use POSIX shell features (`. .ha_env`, env-var prefixes,
+    // `2>/dev/null`).  They require Bash (or another POSIX-compatible shell) as
+    // the VS Code terminal shell.  On Windows, set your terminal profile to Git
+    // Bash or WSL before running these tasks; PowerShell/cmd will not work.
+    //
     // Each task uses the .venv binaries directly and loads .ha_env (if present)
     // before running so that a pre-running HA instance started by
     // "HA: Start persistent server" is used automatically — no Docker boot
