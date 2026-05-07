@@ -197,7 +197,7 @@
     {
       "id": "scenarioId",
       "type": "promptString",
-      "description": "Scenario id or pytest -k expression (e.g. expander_01_collapsed)"
+      "description": "Scenario id or pytest -k expression (e.g. expander_collapsed)"
     }
   ]
 }
