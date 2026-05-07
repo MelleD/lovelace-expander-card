@@ -170,8 +170,8 @@ playwright install chromium
 | All tests — update snapshots & doc images | `SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 pytest tests/` |
 | Scenario tests only | `pytest tests/visual/test_scenarios.py` |
 | Update scenario snapshots | `SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py` |
-| Single scenario | `pytest tests/visual/test_scenarios.py -k expander_01_collapsed` |
-| Single scenario — update snapshot | `SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py -k expander_01_collapsed` |
+| Single scenario | `pytest tests/visual/test_scenarios.py -k expander_collapsed` |
+| Single scenario — update snapshot | `SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py -k expander_collapsed` |
 | Doc images — generate / verify | `pytest tests/visual/test_doc_images.py` |
 | Doc images — update all | `DOC_IMAGE_UPDATE=1 pytest tests/visual/test_doc_images.py` |
 | Doc image audit (no HA needed) | `pytest tests/test_doc_audit.py` |
