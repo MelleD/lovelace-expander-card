@@ -1,0 +1,18 @@
+homeassistant:
+  country: US
+  unit_system: metric
+  time_zone: UTC
+  customize: !include customize.yaml
+
+default_config:
+
+demo:
+
+lovelace:
+  # Dashboard configs are managed by HA storage (writable at runtime via
+  # the WebSocket API).  Resources (JS modules) use YAML so that
+  # ha_testcontainer can register third-party plugins by writing
+  # lovelace_resources.yaml before the container starts.
+  mode: storage
+  resource_mode: yaml
+  resources: !include lovelace_resources.yaml

@@ -147,6 +147,39 @@ npm run lint
 npm run lint-fix
 ```
 
+#### Visual Tests
+
+One-time setup — **VS Code**: open the *Terminal › Run Task* palette and choose *Python: Set up virtual environment*.
+
+One-time setup — **Command line**:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e '.[test]'
+playwright install chromium
+```
+
+**VS Code** — open the *Terminal › Run Task* palette and choose any `pytest:` task (run all, run single scenario, update snapshots, etc.).
+
+**Command line** — activate the virtual environment first, then:
+
+| Goal | Command |
+|---|---|
+| All tests | `pytest tests/` |
+| All tests — update snapshots & doc images | `SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 pytest tests/` |
+| Scenario tests only | `pytest tests/visual/test_scenarios.py` |
+| Update scenario snapshots | `SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py` |
+| Single scenario | `pytest tests/visual/test_scenarios.py -k expander_collapsed` |
+| Single scenario — update snapshot | `SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py -k expander_collapsed` |
+| Doc images — generate / verify | `pytest tests/visual/test_doc_images.py` |
+| Doc images — update all | `DOC_IMAGE_UPDATE=1 pytest tests/visual/test_doc_images.py` |
+| Doc image audit (no HA needed) | `pytest tests/test_doc_audit.py` |
+
+> **Tip:** Start the persistent HA server (`python -m ha_testcontainer.ha_server` or the *HA: Start persistent server* VS Code task) before running tests to skip the Docker boot wait on every run.
+
+> **Tip (debugging):** When the persistent server is running, its URL is logged in the terminal. You can open that URL in a browser and log in with the ha-testcontainer default credentials — username `testadmin`, password `testpassword123` — to inspect the HA instance manually. **Do not browse to the instance before running tests**; doing so may interfere with the test session. If you have already browsed to it, stop the server and start it again before running tests.
+
 #### Docs
 
 Go to docs folder and install [zensical](https://zensical.org/docs/get-started/)

@@ -1,0 +1,17 @@
+# Lovelace plugins to load on every HA instance startup.
+#
+# Local plugin (this card):
+#   local_path - path to the built JS file, relative to this file
+#   filename   - filename to write inside www/
+#
+# Third-party plugins:
+#   repo     - GitHub repository in "owner/name" format
+#   asset    - name of the JS asset to download from the latest release
+#   filename - filename to write inside www/ (usually the same as `asset`)
+#
+# All entries are handled automatically by ha_testcontainer (>=2.1):
+#   1. Copied/downloaded into www/ at container startup.
+#   2. Registered as Lovelace resources.
+
+- local_path: ../dist/expander-card.js
+  filename: expander-card.js

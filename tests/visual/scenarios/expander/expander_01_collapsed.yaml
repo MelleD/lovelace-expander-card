@@ -1,0 +1,26 @@
+id: expander_collapsed
+description: "Expander card renders in collapsed state with title and chevron button"
+view_path: expander-collapsed
+
+card:
+  type: custom:expander-card
+  title: Lights
+  cards:
+    - type: entities
+      entities:
+        - light.bed_light
+
+assertions:
+  - type: element_present
+    root: expander-card
+    selector: ".header"
+
+  - type: snapshot
+    name: "expander_01_collapsed"
+    threshold: 0.02
+
+doc_image:
+  output: docs/source/chapter/assets/expander-collapsed.png
+  root: expander-card
+  padding: 8
+  threshold: 0.02

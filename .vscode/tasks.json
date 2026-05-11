@@ -1,0 +1,208 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // -------------------------------------------------------------------------
+    // Python — virtual environment setup
+    // -------------------------------------------------------------------------
+
+    // Creates .venv, installs all test dependencies, and installs the
+    // Playwright Chromium browser.  Run this once after cloning the repo.
+    {
+      "label": "Python: Set up virtual environment",
+      "type": "shell",
+      "command": "python3 -m venv .venv && .venv/bin/pip install -e '.[test]' && .venv/bin/playwright install chromium",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "always",
+        "group": "setup"
+      }
+    },
+
+    // -------------------------------------------------------------------------
+    // Home Assistant — persistent dev server
+    // -------------------------------------------------------------------------
+
+    // Starts a long-lived HA container once and leaves it running so pytest
+    // can be re-run without waiting for HA to boot each time.
+    // Writes HA_URL + HA_TOKEN to .ha_env; the pytest tasks below source it
+    // automatically.  Press Ctrl-C in this panel to stop HA.
+    {
+      "label": "HA: Start persistent server",
+      "type": "shell",
+      "command": "HA_CONFIG_PATH=tests/ha-config HA_PLUGINS_YAML=tests/plugins.yaml .venv/bin/python -m ha_testcontainer.ha_server",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "ha-server",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^Starting Home Assistant",
+          "endsPattern": "Home Assistant is ready at"
+        }
+      },
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "always",
+        "group": "ha"
+      }
+    },
+
+    // -------------------------------------------------------------------------
+    // pytest — visual / integration tests
+    //
+    // NOTE: These tasks use POSIX shell features (`. .ha_env`, env-var prefixes,
+    // `2>/dev/null`).  They require Bash (or another POSIX-compatible shell) as
+    // the VS Code terminal shell.  On Windows, set your terminal profile to Git
+    // Bash or WSL before running these tasks; PowerShell/cmd will not work.
+    //
+    // Each task uses the .venv binaries directly and loads .ha_env (if present)
+    // before running so that a pre-running HA instance started by
+    // "HA: Start persistent server" is used automatically — no Docker boot
+    // wait.  If .ha_env doesn't exist the dot-source silently fails and pytest
+    // spins up a fresh container.
+    // -------------------------------------------------------------------------
+
+    {
+      "label": "pytest: All tests",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    {
+      "label": "pytest: All tests (Update)",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    {
+      "label": "pytest: All scenarios",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    {
+      "label": "pytest: All scenarios (Update)",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    // Prompts for a scenario id (or -k expression) and runs just that test.
+    // Start "HA: Start persistent server" first for instant re-runs — no
+    // Docker boot wait.  Re-running is safe: the dashboard is created once
+    // and then overwritten per-scenario; there are no stale-state issues.
+    {
+      "label": "pytest: Run single scenario",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    {
+      "label": "pytest: Run single scenario — update (overwrite)",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    {
+      "label": "pytest: Run single doc image — generate / verify",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    {
+      "label": "pytest: Run single doc image — update (overwrite)",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+
+    // -------------------------------------------------------------------------
+    // pytest — documentation images
+    // -------------------------------------------------------------------------
+
+    {
+      "label": "pytest: Doc images — generate / verify",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+    {
+      "label": "pytest: Doc images — update all (overwrite)",
+      "type": "shell",
+      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    },
+
+    // Doc audit needs no HA instance — runs instantly.
+    {
+      "label": "pytest: Doc image audit",
+      "type": "shell",
+      "command": ".venv/bin/pytest tests/test_doc_audit.py",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "shared",
+        "group": "pytest"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "scenarioId",
+      "type": "promptString",
+      "description": "Scenario id or pytest -k expression (e.g. expander_collapsed)"
+    }
+  ]
+}
