@@ -60,7 +60,7 @@ if "HA_VERSION" not in os.environ:
             "or set HA_VERSION explicitly to override it."
         )
 
-    os.environ["HA_VERSION"] = ha_version
+    os.environ.setdefault("HA_VERSION", ha_version)
 
 os.environ.setdefault("HA_CONFIG_PATH", str(_REPO_ROOT / "tests" / "ha-config"))  # NOSONAR
 os.environ.setdefault("HA_PLUGINS_YAML", str(_REPO_ROOT / "tests" / "plugins.yaml"))  # NOSONAR
