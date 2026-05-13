@@ -45,7 +45,7 @@ _HA_VERSION_FILE = _REPO_ROOT / "tests" / "HA_VERSION"
 
 if "HA_VERSION" not in os.environ:
     try:
-        os.environ["HA_VERSION"] = _HA_VERSION_FILE.read_text().strip()
+        os.environ["HA_VERSION"] = _HA_VERSION_FILE.read_text(encoding="utf-8").strip()
     except OSError as exc:
         raise RuntimeError(f"Failed to read default HA version from {_HA_VERSION_FILE}") from exc
 
