@@ -45,9 +45,18 @@ _HA_VERSION_FILE = _REPO_ROOT / "tests" / "HA_VERSION"
 
 if "HA_VERSION" not in os.environ:
     try:
-        os.environ["HA_VERSION"] = _HA_VERSION_FILE.read_text(encoding="utf-8").strip()
+        ha_version = _HA_VERSION_FILE.read_text(encoding="utf-8").strip()
     except OSError as exc:
         raise RuntimeError(f"Failed to read default HA version from {_HA_VERSION_FILE}") from exc
+
+    if not ha_version:
+        raise RuntimeError(
+            f"Default HA version file {_HA_VERSION_FILE} is empty or contains only whitespace. "
+            "Populate tests/HA_VERSION with a non-empty Home Assistant version/tag, "
+            "or set HA_VERSION explicitly to override it."
+        )
+
+    os.environ["HA_VERSION"] = ha_version
 
 os.environ.setdefault("HA_CONFIG_PATH", str(_REPO_ROOT / "tests" / "ha-config"))  # NOSONAR
 os.environ.setdefault("HA_PLUGINS_YAML", str(_REPO_ROOT / "tests" / "plugins.yaml"))  # NOSONAR
