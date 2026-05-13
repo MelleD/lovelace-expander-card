@@ -12,7 +12,7 @@ the ``pytest11`` entry-point and requires no explicit import.
 Environment variables
 ---------------------
 HA_VERSION
-    Docker image tag to use.  Defaults to ``stable``.
+    Docker image tag to use.  Defaults to the version in ``tests/HA_VERSION``.
     Set to ``beta``, ``dev``, or a pinned version such as ``2024.6.0``.
 HA_URL
     Base URL of a **pre-running** Home Assistant instance (e.g.
@@ -41,6 +41,13 @@ from pathlib import Path
 # value (e.g. from ``source .ha_env``) unchanged.
 
 _REPO_ROOT = Path(__file__).parent.parent
+_HA_VERSION_FILE = _REPO_ROOT / "tests" / "HA_VERSION"
 
+try:
+    _DEFAULT_HA_VERSION = _HA_VERSION_FILE.read_text().strip()
+except OSError as exc:
+    raise RuntimeError(f"Failed to read default HA version from {_HA_VERSION_FILE}") from exc
+
+os.environ.setdefault("HA_VERSION", _DEFAULT_HA_VERSION)  # NOSONAR
 os.environ.setdefault("HA_CONFIG_PATH", str(_REPO_ROOT / "tests" / "ha-config"))  # NOSONAR
 os.environ.setdefault("HA_PLUGINS_YAML", str(_REPO_ROOT / "tests" / "plugins.yaml"))  # NOSONAR
