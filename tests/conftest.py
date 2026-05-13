@@ -46,7 +46,7 @@ _HA_VERSION_FILE = _REPO_ROOT / "tests" / "HA_VERSION"
 if "HA_VERSION" not in os.environ:
     try:
         ha_version = _HA_VERSION_FILE.read_text(encoding="utf-8").strip()
-    except OSError as exc:
+    except (OSError, UnicodeDecodeError) as exc:
         raise RuntimeError(
             f"Failed to read default HA version from {_HA_VERSION_FILE}: {exc}. "
             "Create/populate tests/HA_VERSION with a non-empty Home Assistant version/tag, "
