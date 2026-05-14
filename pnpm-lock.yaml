@@ -1358,11 +1358,8 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  devalue@5.7.1:
-    resolution: {integrity: sha512-MUbZ586EgQqdRnC4yDrlod3BEdyvE4TapGYHMW2CiaW+KkkFmWEFqBUaLltEZCGi0iFXCEjRF0OjF0DV2QHjOA==}
-
-  devalue@5.8.0:
-    resolution: {integrity: sha512-2zA9pFEsnp7vWBZbXF5JAgAq0fsUIt/1XPbRiAmRV3lp/2C3upzH+sADiyy66aFCihoLEsrQHxNM5w1gIDfsBg==}
+  devalue@5.8.1:
+    resolution: {integrity: sha512-4CXDYRBGqN+57wVJkuXBYmpAVUSg3L6JAQa/DFqm238G73E1wuyc/JhGQJzN7vUf/CMphYau2zXbfWzDR5aTEw==}
 
   electron-to-chromium@1.5.336:
     resolution: {integrity: sha512-AbH9q9J455r/nLmdNZes0G0ZKcRX73FicwowalLs6ijwOmCJSRRrLX63lcAlzy9ux3dWK1w1+1nsBJEWN11hcQ==}
@@ -3050,7 +3047,7 @@ snapshots:
       '@types/cookie': 0.6.0
       acorn: 8.16.0
       cookie: 0.6.0
-      devalue: 5.8.0
+      devalue: 5.8.1
       esm-env: 1.2.2
       kleur: 4.1.5
       magic-string: 0.30.21
@@ -3328,9 +3325,7 @@ snapshots:
   detect-libc@2.1.2:
     optional: true
 
-  devalue@5.7.1: {}
-
-  devalue@5.8.0: {}
+  devalue@5.8.1: {}
 
   electron-to-chromium@1.5.336: {}
 
@@ -4188,7 +4183,7 @@ snapshots:
       aria-query: 5.3.1
       axobject-query: 4.1.0
       clsx: 2.1.1
-      devalue: 5.7.1
+      devalue: 5.8.1
       esm-env: 1.2.2
       esrap: 2.2.5(@typescript-eslint/types@8.59.2)
       is-reference: 3.0.3
