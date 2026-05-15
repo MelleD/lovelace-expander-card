@@ -12,7 +12,7 @@ the ``pytest11`` entry-point and requires no explicit import.
 Environment variables
 ---------------------
 HA_VERSION
-    Docker image tag to use.  Defaults to ``stable``.
+    Docker image tag to use.  Defaults to the version in ``tests/HA_VERSION``.
     Set to ``beta``, ``dev``, or a pinned version such as ``2024.6.0``.
 HA_URL
     Base URL of a **pre-running** Home Assistant instance (e.g.
@@ -41,6 +41,26 @@ from pathlib import Path
 # value (e.g. from ``source .ha_env``) unchanged.
 
 _REPO_ROOT = Path(__file__).parent.parent
+_HA_VERSION_FILE = _REPO_ROOT / "tests" / "HA_VERSION"
+
+if "HA_VERSION" not in os.environ:
+    try:
+        ha_version = _HA_VERSION_FILE.read_text(encoding="utf-8").strip()
+    except (OSError, UnicodeDecodeError) as exc:
+        raise RuntimeError(
+            f"Failed to read default HA version from {_HA_VERSION_FILE}: {exc}. "
+            "Create/populate tests/HA_VERSION with a non-empty Home Assistant version/tag, "
+            "or set HA_VERSION explicitly to override it."
+        ) from exc
+
+    if not ha_version:
+        raise RuntimeError(
+            f"Default HA version file {_HA_VERSION_FILE} is empty or contains only whitespace. "
+            "Populate tests/HA_VERSION with a non-empty Home Assistant version/tag, "
+            "or set HA_VERSION explicitly to override it."
+        )
+
+    os.environ.setdefault("HA_VERSION", ha_version)
 
 os.environ.setdefault("HA_CONFIG_PATH", str(_REPO_ROOT / "tests" / "ha-config"))  # NOSONAR
 os.environ.setdefault("HA_PLUGINS_YAML", str(_REPO_ROOT / "tests" / "plugins.yaml"))  # NOSONAR
