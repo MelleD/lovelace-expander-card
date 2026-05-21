@@ -67,8 +67,8 @@ importers:
         specifier: ^3.8.3
         version: 3.8.3
       prettier-plugin-svelte:
-        specifier: ^3.5.2
-        version: 3.5.2(prettier@3.8.3)(svelte@5.55.8(@typescript-eslint/types@8.59.4))
+        specifier: ^4.0.0
+        version: 4.0.0(prettier@3.8.3)(svelte@5.55.8(@typescript-eslint/types@8.59.4))
       svelte-check:
         specifier: ^4.4.8
         version: 4.4.8(picomatch@4.0.4)(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@6.0.3)
@@ -1082,6 +1082,11 @@ packages:
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
 
+  '@sveltejs/acorn-typescript@1.0.10':
+    resolution: {integrity: sha512-4WfKk68eTih+MiJD4fSbxN7E8kVBmTMPWHUPYjvl2N0rMs53YLTT8/YjKU5Dtnz5LqDjl7LEw4U7lXR2W3J5WA==}
+    peerDependencies:
+      acorn: ^8.9.0
+
   '@sveltejs/acorn-typescript@1.0.9':
     resolution: {integrity: sha512-lVJX6qEgs/4DOcRTpo56tmKzVPtoWAaVbL4hfO7t7NVwl9AAXzQR6cihesW1BmNMPl+bK6dreu2sOKBP2Q9CIA==}
     peerDependencies:
@@ -2013,11 +2018,12 @@ packages:
     resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
     engines: {node: '>=6.0.0'}
 
-  prettier-plugin-svelte@3.5.2:
-    resolution: {integrity: sha512-ItFouLvzSFE3ulNl4DKoWM3BGcbDCNVpIyy/Y3F2gC3aNiGLxtFUdffVqO5Z5hhYG+DFT5KULWaxmeFFpdbvaQ==}
+  prettier-plugin-svelte@4.0.0:
+    resolution: {integrity: sha512-StoBMZGsfE9ztz1i9ejLhYU2nlP1+FdoWqGCb7Bh7EGVVBW2smCcyoCPxWCdszVdx1SsDiK7n4uAv/YUsHqimQ==}
+    engines: {node: '>=20'}
     peerDependencies:
       prettier: ^3.0.0
-      svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
+      svelte: ^5.0.0
 
   prettier@3.8.3:
     resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
@@ -3049,6 +3055,10 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.4
 
+  '@sveltejs/acorn-typescript@1.0.10(acorn@8.16.0)':
+    dependencies:
+      acorn: 8.16.0
+
   '@sveltejs/acorn-typescript@1.0.9(acorn@8.16.0)':
     dependencies:
       acorn: 8.16.0
@@ -3076,7 +3086,7 @@ snapshots:
 
   '@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.8(@typescript-eslint/types@8.59.4))(vite@6.4.2(lightningcss@1.32.0)))(svelte@5.55.8(@typescript-eslint/types@8.59.4))(vite@6.4.2(lightningcss@1.32.0))':
     dependencies:
-      '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
+      '@sveltejs/acorn-typescript': 1.0.10(acorn@8.16.0)
       '@sveltejs/vite-plugin-svelte': 5.1.1(svelte@5.55.8(@typescript-eslint/types@8.59.4))(vite@6.4.2(lightningcss@1.32.0))
       '@types/cookie': 0.6.0
       acorn: 8.16.0
@@ -4039,7 +4049,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-svelte@3.5.2(prettier@3.8.3)(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
+  prettier-plugin-svelte@4.0.0(prettier@3.8.3)(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
     dependencies:
       prettier: 3.8.3
       svelte: 5.55.8(@typescript-eslint/types@8.59.4)
