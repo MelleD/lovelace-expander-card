@@ -313,7 +313,7 @@
     };
 
     function handleCardUpdated(ev: Event) {
-        // We can stop card-updated event from propagating to avoid some views reload ourself when not required
+        // We can stop card-updated event from propagating to avoid some views reload ourselves when not required
         ev.stopPropagation();
     }
 
