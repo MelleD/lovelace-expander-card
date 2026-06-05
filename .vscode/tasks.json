@@ -68,7 +68,7 @@
     {
       "label": "pytest: All tests",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; .venv/bin/pytest tests/",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -79,7 +79,7 @@
     {
       "label": "pytest: All tests (Update)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -90,7 +90,7 @@
     {
       "label": "pytest: All scenarios",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -101,7 +101,7 @@
     {
       "label": "pytest: All scenarios (Update)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -113,10 +113,11 @@
     // Start "HA: Start persistent server" first for instant re-runs — no
     // Docker boot wait.  Re-running is safe: the dashboard is created once
     // and then overwritten per-scenario; there are no stale-state issues.
+    // and then overwritten per-scenario; there are no stale-state issues.
     {
       "label": "pytest: Run single scenario",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -127,7 +128,7 @@
     {
       "label": "pytest: Run single scenario — update (overwrite)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -138,7 +139,7 @@
     {
       "label": "pytest: Run single doc image — generate / verify",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -149,7 +150,7 @@
     {
       "label": "pytest: Run single doc image — update (overwrite)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -165,7 +166,7 @@
     {
       "label": "pytest: Doc images — generate / verify",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/visual/test_doc_images.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -176,7 +177,7 @@
     {
       "label": "pytest: Doc images — update all (overwrite)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 pytest tests/visual/test_doc_images.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -189,7 +190,7 @@
     {
       "label": "pytest: Doc image audit",
       "type": "shell",
-      "command": ".venv/bin/pytest tests/test_doc_audit.py",
+      "command": "source .venv/bin/activate && source .ha_env 2>/dev/null; pytest tests/test_doc_audit.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
