@@ -26,7 +26,7 @@ export default tseslint.config(
     ...tseslint.configs.recommended,
     ...eslintPluginSvelte.configs['flat/recommended'],
     {
-        ignores: ['eslint.config.mjs','rollup.config.mjs','dist/**/*','vite.config.js', 'svelte.config.js', 'eslint.config.js', '.svelte-kit/**/*', 'build/**/*', 'docs/**/*', '.venv/**/*'],
+        ignores: ['eslint.config.mjs','rollup.config.mjs','dist/**/*','vite.config.js', 'svelte.config.js', 'eslint.config.js', '.svelte-kit/**/*', 'build/**/*', 'docs/**/*', '.venv/**/*', 'tests/**/*'],
     },
     {
         plugins: {
