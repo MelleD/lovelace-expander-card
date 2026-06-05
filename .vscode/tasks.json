@@ -63,7 +63,9 @@
     // Bash or WSL before running these tasks; PowerShell/cmd will not work.
     //
     // Each task uses the .venv binaries directly and loads .ha_env from the
-    // workspace root (if present)
+    // workspace root (if present). Keep the `${workspaceFolder}` prefix in the
+    // source command so tasks resolve .ha_env from the workspace root even if a
+    // VS Code terminal session was previously started in a different directory.
     // before running so that a pre-running HA instance started by
     // "HA: Start persistent server" is used automatically — no Docker boot
     // wait.  If .ha_env doesn't exist the dot-source silently fails and pytest
