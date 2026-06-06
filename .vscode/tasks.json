@@ -1,5 +1,8 @@
 {
   "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
   "tasks": [
     // -------------------------------------------------------------------------
     // Python — virtual environment setup
@@ -53,12 +56,16 @@
     // -------------------------------------------------------------------------
     // pytest — visual / integration tests
     //
-    // NOTE: These tasks use POSIX shell features (`. .ha_env`, env-var prefixes,
+    // NOTE: These tasks use POSIX shell features (`. "${workspaceFolder}/.ha_env"`,
+    // env-var prefixes,
     // `2>/dev/null`).  They require Bash (or another POSIX-compatible shell) as
     // the VS Code terminal shell.  On Windows, set your terminal profile to Git
     // Bash or WSL before running these tasks; PowerShell/cmd will not work.
     //
-    // Each task uses the .venv binaries directly and loads .ha_env (if present)
+    // Each task uses the .venv binaries directly and loads .ha_env from the
+    // workspace root (if present). Keep the `${workspaceFolder}` prefix in the
+    // source command so tasks resolve .ha_env from the workspace root even if a
+    // VS Code terminal session was previously started in a different directory.
     // before running so that a pre-running HA instance started by
     // "HA: Start persistent server" is used automatically — no Docker boot
     // wait.  If .ha_env doesn't exist the dot-source silently fails and pytest
@@ -68,7 +75,7 @@
     {
       "label": "pytest: All tests",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; .venv/bin/pytest tests/",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -79,7 +86,7 @@
     {
       "label": "pytest: All tests (Update)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; SNAPSHOT_UPDATE=1 DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -90,7 +97,7 @@
     {
       "label": "pytest: All scenarios",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -101,7 +108,7 @@
     {
       "label": "pytest: All scenarios (Update)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -116,7 +123,7 @@
     {
       "label": "pytest: Run single scenario",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -127,7 +134,7 @@
     {
       "label": "pytest: Run single scenario — update (overwrite)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; SNAPSHOT_UPDATE=1 .venv/bin/pytest tests/visual/test_scenarios.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -138,7 +145,7 @@
     {
       "label": "pytest: Run single doc image — generate / verify",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -149,7 +156,7 @@
     {
       "label": "pytest: Run single doc image — update (overwrite)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py -k '${input:scenarioId}'",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -165,7 +172,7 @@
     {
       "label": "pytest: Doc images — generate / verify",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; .venv/bin/pytest tests/visual/test_doc_images.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
@@ -176,7 +183,7 @@
     {
       "label": "pytest: Doc images — update all (overwrite)",
       "type": "shell",
-      "command": ". .ha_env 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py",
+      "command": ". \"${workspaceFolder}/.ha_env\" 2>/dev/null; DOC_IMAGE_UPDATE=1 .venv/bin/pytest tests/visual/test_doc_images.py",
       "group": "test",
       "problemMatcher": [],
       "presentation": {
