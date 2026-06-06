@@ -20,9 +20,3 @@ assertions:
   - type: snapshot
     name: "expander_04_clear_background"
     threshold: 0.02
-
-doc_image:
-  output: docs/source/chapter/assets/expander-clear.png
-  root: expander-card
-  padding: 8
-  threshold: 0.02

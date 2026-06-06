@@ -18,9 +18,3 @@ assertions:
   - type: snapshot
     name: "expander_01_collapsed"
     threshold: 0.02
-
-doc_image:
-  output: docs/source/chapter/assets/expander-collapsed.png
-  root: expander-card
-  padding: 8
-  threshold: 0.02
