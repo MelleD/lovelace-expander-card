@@ -1,0 +1,31 @@
+id: expander_nested_masonry
+description: "Expander cards can be nested on masonry view — first click works"
+view_path: expander-nested-masonry
+
+dashboard:
+  views:
+    - type: masonry
+      title: Masonry
+      path: ""
+      cards:
+        - type: custom:expander-card
+          title: Expander Card
+          cards:
+            - type: custom:expander-card
+              title: Expander Card
+              cards:
+                - type: logbook
+                  hours_to_show: 168
+                  entities:
+                    - light.bed_light
+
+interactions:
+  - type: click
+    root: expander-card
+    selector: ".header"
+    settle: 300
+
+assertions:
+  - type: snapshot
+    name: "expander_07_nested_masonry"
+    threshold: 0.02

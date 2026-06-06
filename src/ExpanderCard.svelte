@@ -312,7 +312,13 @@
         }
     };
 
+    function handleCardUpdated(ev: Event) {
+        // We can stop card-updated event from propagating to avoid some views reload ourselves when not required
+        ev.stopPropagation();
+    }
+
     function cleanup() {
+        $host().removeEventListener('card-updated', handleCardUpdated);
         document.body.removeEventListener('ll-custom', handleLlCustomEvent);
         document.body.removeEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
         Object.entries(templateRenderers).forEach(([key, renderer]) => {
@@ -495,6 +501,7 @@
         setExpandedFromConfig();
         setOpenStateByPreview();
 
+        $host().addEventListener('card-updated', handleCardUpdated);
         document.body.addEventListener('ll-custom', handleLlCustomEvent);
         document.body.addEventListener('expander-card-raw-config-updated', handleRawConfigUpdate);
 
