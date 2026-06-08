@@ -1,0 +1,55 @@
+id: expander_trend_graph_autoentities
+description: "Tile trend-graph features inside auto-entities recover their size when a collapsed expander is opened"
+view_path: expander-trend-graph
+
+# Regression test for the trend-graph "no graph after expanding" bug.
+# auto-entities keeps its child tiles mounted at 0x0 while the expander is
+# collapsed; HA's trend-graph feature/hui-graph-base bake their SVG viewBox once
+# from clientWidth/clientHeight and have no ResizeObserver, so without the
+# Card.svelte reconnect-on-open workaround the graphs stay at the broken
+# "0 0 500 100" fallback (invisible) after the expander is opened.
+card:
+  type: custom:expander-card
+  title: Sensors
+  expanded: false
+  cards:
+    - type: custom:auto-entities
+      card:
+        type: grid
+        square: false
+        columns: 1
+      card_param: cards
+      filter:
+        include:
+          - entity_id: sensor.outside_temperature
+            options:
+              type: tile
+              features_position: inline
+              vertical: false
+              features:
+                - type: trend-graph
+                  hours_to_show: 24
+                  detail: true
+          - entity_id: sensor.outside_humidity
+            options:
+              type: tile
+              features_position: inline
+              vertical: false
+              features:
+                - type: trend-graph
+                  hours_to_show: 24
+                  detail: true
+
+interactions:
+  - type: click
+    root: expander-card
+    selector: ".header"
+    settle_ms: 1500
+
+assertions:
+  - type: element_present
+    root: expander-card
+    selector: ".children-container.open"
+
+  - type: trend_graph_rendered
+    min_features: 2

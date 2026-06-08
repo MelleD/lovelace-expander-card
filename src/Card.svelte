@@ -64,6 +64,30 @@ limitations under the License.
             container._element?.dispatchEvent(new CustomEvent('card-visibility-changed', { detail: { value: open }, bubbles: true, composed: false }));
         }
     });
+    let wasOpen = untrack(() => open);
+    $effect(() => {
+        const isOpen = open;
+        // When the expander is first opened, reconnect the child card subtree
+        // once it has a real size. Child cards that rendered while collapsed
+        // can cache a 0x0 geometry: HA's trend-graph tile feature and
+        // hui-graph-base bake their SVG viewBox from clientWidth/clientHeight a
+        // single time and have no ResizeObserver, so the graph never recovers
+        // when later shown. Removing and re-appending the element forces a
+        // disconnect/reconnect of the whole subtree, which makes those
+        // components re-measure and re-render at the correct size.
+        if (container && outerContainer && isOpen && !wasOpen) {
+            const el = container;
+            const parent = outerContainer;
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                if (el.parentElement === parent) {
+                    const next = el.nextSibling;
+                    parent.removeChild(el);
+                    parent.insertBefore(el, next);
+                }
+            }));
+        }
+        wasOpen = isOpen;
+    });
 
     onMount(async () => {
         const el: HuiCard = document.createElement('hui-card') as HuiCard;

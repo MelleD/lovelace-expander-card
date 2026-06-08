@@ -15,3 +15,11 @@
 
 - local_path: ../dist/expander-card.js
   filename: expander-card.js
+
+# Third-party card used by the trend-graph regression scenario
+# (expander_08_trend_graph_autoentities): auto-entities keeps its child tiles
+# mounted at 0x0 while the expander is collapsed, which is what triggers the
+# HA trend-graph "no graph after expanding" bug the expander now works around.
+- repo: thomasloven/lovelace-auto-entities
+  asset: auto-entities.js
+  filename: auto-entities.js
