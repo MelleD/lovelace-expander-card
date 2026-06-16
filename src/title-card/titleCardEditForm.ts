@@ -117,14 +117,14 @@ export class TitleCardEditForm extends LitElement {
                 <div slot="primaryAction" @click=${this._submit.bind(this)}>
                     <ha-button
                         appearance="plain"
-                        size="small"
+                        size="s"
                         @click=${this._cancel.bind(this)}
                         dialogInitialFocus
                     >
                         ${this._params.cancelText || this.hass.localize('ui.common.cancel')}
                     </ha-button>
                     <ha-button
-                        size="small"
+                        size="s"
                         @click=${this._submit.bind(this)} 
                         disabled=${ifDefined(disableSave)}
                     >
@@ -171,7 +171,7 @@ export class TitleCardEditForm extends LitElement {
             <div slot="secondaryAction">
                 <ha-button
                 appearance="plain"
-                size="small"
+                size="s"
                 @click=${this._toggleCardMode.bind(this)}
                 .disabled=${!this._cardGUIModeAvailable}
                 >
@@ -179,7 +179,7 @@ export class TitleCardEditForm extends LitElement {
                 </ha-button>
                 <ha-button
                 appearance="plain"
-                size="small"
+                size="s"
                 @click=${this._deleteCard.bind(this)}
                 >
                     Change card
