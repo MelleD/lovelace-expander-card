@@ -26,7 +26,7 @@ For comprehensive information on available CSS classes, state classes, animation
 Learning by example is often the best approach to styling. Our examples section provides a curated collection of ready-to-use styling snippets that demonstrate various techniques and effects.
 You can copy these examples directly into your configuration and adapt them to your needs.
 
-Explore the [YAML Styling Examples](examples/yaml-styling-examples.md) to see what's possible and get inspired for your own custom designs.
+Explore the [YAML Styling Examples](styling-examples.md) to see what's possible and get inspired for your own custom designs.
 
 ## Hover Effects
 
