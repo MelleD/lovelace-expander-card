@@ -67,7 +67,7 @@ jobs:
       - uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 #5.0.0
 
       - name: "Create Github release (full)"
-        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b #v2
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 #v2
         id: expander_card_release
         with:
           body: "Release version ${{ github.event.inputs.release_version }}."
