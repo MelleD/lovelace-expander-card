@@ -17,7 +17,7 @@
         "lint-fix": "eslint . --fix"
     },
     "devDependencies": {
-        "@eslint/eslintrc": "^3.3.5",
+        "@eslint/eslintrc": "^3.3.6",
         "@eslint/js": "^10.0.1",
         "@stylistic/eslint-plugin": "^5.10.0",
         "@sveltejs/adapter-node": "^5.5.7",
