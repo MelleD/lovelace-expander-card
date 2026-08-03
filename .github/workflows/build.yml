@@ -57,7 +57,12 @@ jobs:
           run: uv python install
 
         - name: Install test dependencies
-          run: uv sync --extra test --locked
+          run: |
+            uv sync --extra test --locked \
+              --no-build-package ha-testcontainer \
+              --no-build-package pytest \
+              --no-build-package PyYAML \
+              --no-build-package playwright
 
         - name: Install Playwright browsers
           run: uv run --locked playwright install chromium
