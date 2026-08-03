@@ -79,7 +79,7 @@ jobs:
           $INSTALL_CMD "$WHEEL_FILE"
 
       - name: Install Playwright browsers
-        run: uv run --locked --no-build playwright install chromium
+        run: uv run --no-project --locked --no-build playwright install chromium
 
       - name: Run visual tests
-        run: uv run --locked --no-build pytest tests/
+        run: uv run --no-project --locked --no-build pytest tests/
