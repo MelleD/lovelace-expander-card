@@ -41,26 +41,26 @@ jobs:
           name: expander-card
           path: |
               dist
-visual-tests:
-    permissions:
-      contents: read
-    name: Visual Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #7.0.1
-      - name: Install uv
-        uses: astral-sh/setup-uv@8bb3a9e34e5a5c1a8bf0e57a4c8b8b8b8b8b8b8b #v9.0.0
-        with:
-          enable-cache: true
+  visual-tests:
+      permissions:
+        contents: read
+      name: Visual Tests
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #7.0.1
+        - name: Install uv
+          uses: astral-sh/setup-uv@8bb3a9e34e5a5c1a8bf0e57a4c8b8b8b8b8b8b8b #v9.0.0
+          with:
+            enable-cache: true
 
-      - name: Set up Python
-        run: uv python install
+        - name: Set up Python
+          run: uv python install
 
-      - name: Install test dependencies
-        run: uv sync --extra test --locked --no-build
+        - name: Install test dependencies
+          run: uv sync --extra test --locked --no-build
 
-      - name: Install Playwright browsers
-        run: uv run --locked --no-build playwright install chromium
+        - name: Install Playwright browsers
+          run: uv run --locked --no-build playwright install chromium
 
-      - name: Run visual tests
-        run: uv run --locked --no-build pytest tests/
+        - name: Run visual tests
+          run: uv run --locked --no-build pytest tests/
