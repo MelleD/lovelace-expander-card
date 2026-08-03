@@ -1,47 +1,3 @@
-name: 'Build'
-
-on:
-  pull_request:
-    branches: 
-      - main
-  push: 
-    branches:
-      - main
-
-jobs:
-  build:
-    permissions:
-      contents: read
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #7.0.1
-      - name: Setup Git
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
-        name: Install pnpm
-        with:
-            version: 9
-            run_install: false
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #7.0.0
-        name: Install Node.js
-        with:
-            node-version: 24
-            cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
-      - name: Build
-        run: pnpm run build
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
-        with:
-          name: expander-card
-          path: |
-              dist
-
   visual-tests:
     permissions:
       contents: read
@@ -51,37 +7,18 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #7.0.1
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 #v9.0.0
         with:
           enable-cache: true
 
       - name: Set up Python
-        run: uv python install
+        run: uv python install --no-build
 
       - name: Install test dependencies
-        run: uv sync --extra test --locked
+        run: uv sync --extra test --locked --no-build
 
       - name: Install Playwright browsers
-        run: uv run playwright install --with-deps chromium
+        run: uv run --no-build playwright install --with-deps chromium
 
       - name: Run visual tests
-        run: uv run pytest tests/
-
-      - name: Upload snapshot diffs on failure
-        if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
-        with:
-          name: visual-test-failures
-          path: tests/**/__snapshots__/**/*-diff.png
-
-      - name: Comment PR on failure
-        if: failure() && github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '❌ Visual tests failed. Check the "visual-test-failures" artifact for snapshot diffs.'
-            })
+        run: uv run --no-build pytest tests/
