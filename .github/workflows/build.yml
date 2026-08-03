@@ -41,3 +41,45 @@ jobs:
           name: expander-card
           path: |
               dist
+
+  visual-tests:
+    needs: build
+    permissions:
+      contents: read
+    name: Visual Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #7.0.1
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: expander-card
+          path: dist
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Build project wheel
+        run: uv build --wheel
+
+      - name: Install test dependencies (excluding project)
+        run: uv sync --extra test --locked --no-build --no-install-project
+
+      - name: Install project from prebuilt wheel
+        env:
+          INSTALL_CMD: "uv pip install --no-build --no-deps"
+        run: |
+          WHEEL_FILE=$(ls dist/*.whl)
+          $INSTALL_CMD "$WHEEL_FILE"
+
+      - name: Install Playwright browsers
+        run: uv run --no-project --locked --no-build playwright install chromium
+
+      - name: Run visual tests
+        run: uv run --no-project --locked --no-build pytest tests/
