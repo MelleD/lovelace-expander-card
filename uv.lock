@@ -229,7 +229,7 @@ wheels = [
 [[package]]
 name = "lovelace-expander-card"
 version = "0.0.1"
-source = { editable = "." }
+source = { virtual = "." }
 
 [package.optional-dependencies]
 test = [
