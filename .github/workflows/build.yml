@@ -72,9 +72,11 @@ jobs:
         run: uv sync --extra test --locked --no-build --no-install-project
 
       - name: Install project from prebuilt wheel
+        env:
+          INSTALL_CMD: "uv pip install --no-build --no-deps"
         run: |
           WHEEL_FILE=$(ls dist/*.whl)
-          uv pip install --no-build --no-deps "$WHEEL_FILE"
+          $INSTALL_CMD "$WHEEL_FILE"
 
       - name: Install Playwright browsers
         run: uv run --no-build --locked playwright install chromium
