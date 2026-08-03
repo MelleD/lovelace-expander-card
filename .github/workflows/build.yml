@@ -65,11 +65,19 @@ jobs:
       - name: Set up Python
         run: uv python install
 
-      - name: Install test dependencies and project
-        run: uv sync --extra test --frozen
+      - name: Build project wheel
+        run: uv build --wheel
+
+      - name: Install test dependencies (excluding project)
+        run: uv sync --extra test --locked --no-build --no-install-project
+
+      - name: Install project from prebuilt wheel
+        run: |
+          WHEEL_FILE=$(ls dist/*.whl)
+          uv pip install --no-build --no-deps "$WHEEL_FILE"
 
       - name: Install Playwright browsers
-        run: uv run --no-project playwright install chromium
+        run: uv run --no-project --locked playwright install chromium
 
       - name: Run visual tests
-        run: uv run --no-project pytest tests/
+        run: uv run --no-project --locked pytest tests/
