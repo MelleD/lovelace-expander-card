@@ -57,7 +57,7 @@ jobs:
           run: uv python install
 
         - name: Install test dependencies
-          run: uv sync --extra test --locked --no-build
+          run: uv sync --extra test --locked
 
         - name: Install Playwright browsers
           run: uv run --locked --no-build playwright install chromium
