@@ -65,14 +65,8 @@ jobs:
       - name: Set up Python
         run: uv python install
 
-      - name: Build project wheel
-        run: uv build --wheel
-
-      - name: Install test dependencies (excluding project)
-        run: uv sync --extra test --locked --no-build --no-install-project
-
-      - name: Install project from prebuilt wheel
-        run: uv pip install --no-build --no-deps dist/*.whl
+      - name: Install test dependencies
+        run: uv sync --extra test --locked
 
       - name: Install Playwright browsers
         run: uv run --locked playwright install chromium
