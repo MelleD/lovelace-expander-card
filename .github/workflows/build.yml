@@ -77,7 +77,7 @@ jobs:
           uv pip install --no-build --no-deps "$WHEEL_FILE"
 
       - name: Install Playwright browsers
-        run: uv run --no-project --locked playwright install chromium
+        run: uv run --no-build --locked playwright install chromium
 
       - name: Run visual tests
-        run: uv run --no-project --locked pytest tests/
+        run: uv run --no-build --locked pytest tests/
