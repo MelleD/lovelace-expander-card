@@ -16,3 +16,9 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+
+  # Enable version updates for Python (uv)
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "daily"
