@@ -20,4 +20,4 @@ testpaths = ["tests"]
 addopts = "-v --tb=short"
 
 [tool.uv]
-package = false
+no-editable = true
