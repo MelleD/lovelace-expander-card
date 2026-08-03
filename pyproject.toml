@@ -18,6 +18,3 @@ test = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v --tb=short"
-
-[tool.uv]
-no-editable = true
