@@ -65,13 +65,11 @@ jobs:
       - name: Set up Python
         run: uv python install
 
+      - name: Build project wheel
+        run: uv build --wheel
+
       - name: Install test dependencies
-        run: |
-          uv sync --extra test --locked \
-            --no-build-package ha-testcontainer \
-            --no-build-package pytest \
-            --no-build-package PyYAML \
-            --no-build-package playwright
+        run: uv sync --extra test --locked --no-build
 
       - name: Install Playwright browsers
         run: uv run --locked playwright install chromium
