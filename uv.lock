@@ -241,7 +241,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ha-testcontainer", extras = ["test"], marker = "extra == 'test'", specifier = ">=2.1" },
+    { name = "ha-testcontainer", extras = ["test"], marker = "extra == 'test'", specifier = ">=2.7.0" },
     { name = "playwright", marker = "extra == 'test'", specifier = ">=1.0" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=7.0" },
     { name = "pyyaml", marker = "extra == 'test'", specifier = ">=6.0" },
