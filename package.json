@@ -43,7 +43,7 @@
     },
     "dependencies": {
         "home-assistant-javascript-templates": "^7.1.0",
-        "home-assistant-query-selector": "^6.2.1",
+        "home-assistant-query-selector": "^7.0.0",
         "lit": "^3.3.3",
         "svelte": "5.56.8"
     },
