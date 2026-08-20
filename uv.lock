@@ -187,16 +187,16 @@ wheels = [
 
 [[package]]
 name = "ha-testcontainer"
-version = "2.7.0"
+version = "2.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
     { name = "testcontainers" },
     { name = "websocket-client" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8b/03/7aeb2d3416e312f6f7fda75051892be277b5fa975651dfdd797ac93a8425/ha_testcontainer-2.7.0.tar.gz", hash = "sha256:4ef83ac7dba9cb96e05b950cfbdf0f981f02ac5ede549e862adcb2d3b5962869", size = 69400, upload-time = "2026-07-21T11:21:05.813Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/bb/c6/c1fdb9124345b26490095b722c4a4d17535caf92f2d6ae3a151aaaf2d515/ha_testcontainer-2.8.0.tar.gz", hash = "sha256:94173ff51a54358af330bd0fa175a61acb63dd8db04477b3a3ff98dce7d16d2d", size = 69502, upload-time = "2026-08-16T05:43:39.192Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a3/c0/a2cdbe30674433482e9fb3378f7f4caae8762f914cf9cdaba4ef6d6bd086/ha_testcontainer-2.7.0-py3-none-any.whl", hash = "sha256:a1501fec7b9fd0685f996bba1ce7ea6bf3e65bf01d7cd6244c1a5c9b099e0a5c", size = 60905, upload-time = "2026-07-21T11:21:04.208Z" },
+    { url = "https://files.pythonhosted.org/packages/2a/58/7eb4e13235ebf4b4e434af4cbddf202a9158b0ec68fc5e0ec064b16fc5af/ha_testcontainer-2.8.0-py3-none-any.whl", hash = "sha256:7f00c0d444ca0560ef02befd65c3e4d80608d98b6f2a0ca1b3492f2230dda01e", size = 60958, upload-time = "2026-08-16T05:43:37.741Z" },
 ]
 
 [package.optional-dependencies]
@@ -241,7 +241,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ha-testcontainer", extras = ["test"], marker = "extra == 'test'", specifier = ">=2.7.0" },
+    { name = "ha-testcontainer", extras = ["test"], marker = "extra == 'test'", specifier = ">=2.8.0" },
     { name = "playwright", marker = "extra == 'test'", specifier = ">=1.0" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=7.0" },
     { name = "pyyaml", marker = "extra == 'test'", specifier = ">=6.0" },
