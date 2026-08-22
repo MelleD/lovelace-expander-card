@@ -10,7 +10,7 @@ export function getJSTemplateRenderer(variables: Record<string, unknown> = {}, r
             refs,
             refsVariableName: 'variables'
         }
-    ).getRenderer();
+    ).getRenderer().then((renderer) => renderer.init());
 }
 
 export function isJSTemplate(template: unknown): boolean {

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=83.0.0"]
+requires = ["setuptools>=84.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -9,7 +9,7 @@ requires-python = ">=3.11"
 
 [project.optional-dependencies]
 test = [
-    "ha-testcontainer[test]>=2.7.0",
+    "ha-testcontainer[test]>=2.8.0",
     "pytest>=7.0",
     "PyYAML>=6.0",
     "playwright>=1.0",

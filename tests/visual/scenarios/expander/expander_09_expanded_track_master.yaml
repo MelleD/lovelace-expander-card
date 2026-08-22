@@ -1,0 +1,53 @@
+id: expander_expanded_track_master
+description: "Expander card child cards are tracked by master card and rendered in expanded state"
+view_path: expander-expanded-track-master
+
+interactions:
+  - type: click
+    root: div.card:nth-of-type(1) hui-card expander-card
+    selector: ".header"
+    settle_ms: 1000
+  - type: hover_away
+    settle_ms: 500
+
+cards:
+  - type: custom:expander-card
+    title: Expander Card - Master
+    expander-card-id: test_expander_id
+    cards:
+      - type: entities
+        entities:
+          - light.bed_light
+  - type: custom:expander-card
+    title: Expander Card - Follow
+    cards:
+      - type: entities
+        entities:
+          - light.bed_light
+    templates:
+      - template: expanded
+        value_template: |-
+          [[[
+            return variables.test_expander_id_open;
+          ]]]
+
+assertions:
+  - type: element_present
+    root: div.card:nth-of-type(1) hui-card expander-card
+    selector: ".header"
+
+  - type: element_present
+    root: div.card:nth-of-type(2) hui-card expander-card
+    selector: ".header"
+
+  - type: element_present
+    root: div.card:nth-of-type(1) hui-card expander-card
+    selector: ".children-container.open"
+
+  - type: element_present
+    root: div.card:nth-of-type(2) hui-card expander-card
+    selector: ".children-container.open"
+
+  - type: snapshot
+    name: "expander_09_expanded_track_master"
+    threshold: 0.02

@@ -1,0 +1,85 @@
+id: expander_expanded_styled_by_template
+description: "Expander card renders in expanded state and styled by template"
+view_path: expander-expanded-styled-by-template
+
+setup:
+  - type: ha_service
+    domain: light
+    service: turn_off
+    data:
+      entity_id: light.bed_light
+
+interactions:
+  - type: ha_service
+    domain: light
+    service: turn_on
+    data:
+      entity_id: light.bed_light
+      brightness: 181
+      color_temp_kelvin: 2631
+  - type: wait
+    ms: 1000
+
+card:
+  type: custom:expander-card
+  title: Lights
+  cards:
+    - type: entities
+      entities:
+        - light.bed_light
+  variables:
+    - variable: bed_light_on
+      value_template: |
+        [[[
+          return is_state('light.bed_light', 'on');
+        ]]]
+  templates:
+    - template: expanded
+      value_template: |
+        [[[
+          return variables.bed_light_on ?? false;
+        ]]]
+    - template: style
+      value_template: |
+        [[[
+          return `
+            .header.animation.open > .title,
+            .header.animation.opening > .title
+            { 
+              transition: color 0.35s ease, font-weight 0.35s ease;
+              color: ${variables.bed_light_on ? 'red' : 'var(--primary-text-color)'};
+              font-weight: ${variables.bed_light_on ? '700' : 'var(--ha-font-weight-body)'};
+            }`;
+        ]]]
+
+assertions:
+  - type: element_present
+    root: expander-card
+    selector: ".header"
+
+  - type: element_present
+    root: expander-card
+    selector: ".children-container.open"
+
+  - type: css_property
+    root: expander-card
+    selector: "div.title"
+    property: "color"
+    expected: "rgb(255, 0, 0)"
+
+  - type: css_property
+    root: expander-card
+    selector: "div.title"
+    property: "fontWeight"
+    expected: "700"
+
+  - type: snapshot
+    name: "expander_08_expanded_styled_by_template"
+    threshold: 0.02
+
+teardown:
+  - type: ha_service
+    domain: light
+    service: turn_off
+    data:
+      entity_id: light.bed_light
