@@ -20,7 +20,7 @@ jobs:
         # Hier wird bewusst main ausgecheckt für die Config-Datei
         
       - name: Label issues
-        uses: github/issue-labeler@c1b0f9f52a63158c4adc09425e858e87b32e9685 #3.4.0
+        uses: github/issue-labeler@ccca1e16fcb66762200e616fc29b57b940c1cb67 #3.4.0
         with:
           configuration-path: .github/labeler.yml
           include-title: 1
