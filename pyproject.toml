@@ -9,7 +9,7 @@ requires-python = ">=3.11"
 
 [project.optional-dependencies]
 test = [
-    "ha-testcontainer[test]>=2.9.0",
+    "ha-testcontainer[test]>=2.11.0",
     "pytest>=7.0",
     "PyYAML>=6.0",
     "playwright>=1.63.0",
