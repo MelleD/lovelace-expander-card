@@ -187,16 +187,16 @@ wheels = [
 
 [[package]]
 name = "ha-testcontainer"
-version = "2.11.0"
+version = "2.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
     { name = "testcontainers" },
     { name = "websocket-client" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1a/ed/28a43fe34d1fcf2dfcd98da3c5f1161409c4114244d1adbfc238a70527a4/ha_testcontainer-2.11.0.tar.gz", hash = "sha256:25d7fb66fa74d46b7cc8a6eeaabdc9148d5216ffff0914cd4f36e9714a7940c1", size = 74500, upload-time = "2026-09-21T10:45:59.977Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/65/64/3361974fdd135b8860378c47d4d4d7b7d51098e43e92984ca1fa948b221f/ha_testcontainer-2.12.0.tar.gz", hash = "sha256:3f0564ef8313519adc7accab0013b8ce0fdbda0d1df51fd38a58c3a209d2d25f", size = 76114, upload-time = "2026-10-03T02:49:02.308Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f1/1a/aca483dc08e6ee102c5e6fbfce835f46dfd17f207d7728d7b3c88f79d110/ha_testcontainer-2.11.0-py3-none-any.whl", hash = "sha256:1e3b390c58491cfa7c6baef6e96be527a6f9081dbb2cf4a99414feb947305774", size = 63584, upload-time = "2026-09-21T10:45:58.623Z" },
+    { url = "https://files.pythonhosted.org/packages/cd/1c/1f84d04feb796cd69bd9ae1ff5c2098a9452f6a9d6d568270fcc4d4f5de4/ha_testcontainer-2.12.0-py3-none-any.whl", hash = "sha256:3f9a0455472a7320b13f5d8c5dd0ad6ebc9c5f151e92721c5f59eb296d7f0b50", size = 64328, upload-time = "2026-10-03T02:49:00.998Z" },
 ]
 
 [package.optional-dependencies]
@@ -241,7 +241,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ha-testcontainer", extras = ["test"], marker = "extra == 'test'", specifier = ">=2.11.0" },
+    { name = "ha-testcontainer", extras = ["test"], marker = "extra == 'test'", specifier = ">=2.12.0" },
     { name = "playwright", marker = "extra == 'test'", specifier = ">=1.63.0" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=7.0" },
     { name = "pyyaml", marker = "extra == 'test'", specifier = ">=6.0" },
