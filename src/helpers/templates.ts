@@ -1,8 +1,15 @@
 import HomeAssistantJavaScriptTemplates, { HomeAssistant, HomeAssistantJavaScriptTemplatesRenderer } from 'home-assistant-javascript-templates';
 import { ExpanderCardEventDetail } from '../types';
 
+function initRenderer(renderer: Promise<HomeAssistantJavaScriptTemplatesRenderer>): Promise<HomeAssistantJavaScriptTemplatesRenderer> {
+    return renderer.then((resolvedRenderer) => {
+        void resolvedRenderer.init();
+        return resolvedRenderer;
+    });
+}
+
 export function getJSTemplateRenderer(variables: Record<string, unknown> = {}, refs: Record<string, unknown> = {}): Promise<HomeAssistantJavaScriptTemplatesRenderer> {
-    return new HomeAssistantJavaScriptTemplates(
+    return initRenderer(new HomeAssistantJavaScriptTemplates(
         document.querySelector('home-assistant') as HomeAssistant,
         {
             autoReturn: false,
@@ -10,7 +17,7 @@ export function getJSTemplateRenderer(variables: Record<string, unknown> = {}, r
             refs,
             refsVariableName: 'variables'
         }
-    ).getRenderer().then((renderer) => renderer.init());
+    ).getRenderer());
 }
 
 export function isJSTemplate(template: unknown): boolean {
