@@ -385,8 +385,14 @@
             }, 100);
             //  A touch event may not always be followed by a click event so we manually control the ripple
             if (ripple) {
-                ripple.startPressAnimation();
-                ripple.endPressAnimation();
+                // ha-ripple pre HA 2026.11.0
+                ripple.startPressAnimation && ripple.startPressAnimation();
+                ripple.endPressAnimation && ripple.endPressAnimation();
+                // ha-ripple post HA 2026.11.0
+                // eslint-disable-next-line no-underscore-dangle
+                ripple._startPress && ripple._startPress();
+                // eslint-disable-next-line no-underscore-dangle
+                ripple._endPress && ripple._endPress();
             }
         }
         touchElement = undefined;
