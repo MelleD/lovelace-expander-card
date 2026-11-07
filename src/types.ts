@@ -36,8 +36,12 @@ export interface HuiCard extends LovelaceCard {
 
 export interface HaRipple extends HTMLElement {
     disabled?: boolean;
-    startPressAnimation(event?: Event): void;
-    endPressAnimation(): void;
+    // ha-ripple pre HA 2026.11.0
+    startPressAnimation?(event?: Event): void;
+    endPressAnimation?(): void;
+    // ha-ripple post HA 2026.11.0
+    _startPress?(event?: Event): void;
+    _endPress?(): void;
 }
 
 export interface HuiRoot extends HTMLElement {
