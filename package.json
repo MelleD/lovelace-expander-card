@@ -42,7 +42,7 @@
         "vite": "^8.3.8"
     },
     "dependencies": {
-        "home-assistant-javascript-templates": "^8.0.0",
+        "home-assistant-javascript-templates": "^9.0.0",
         "home-assistant-query-selector": "^7.0.0",
         "lit": "^3.3.3",
         "svelte": "5.57.3"
