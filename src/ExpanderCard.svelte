@@ -86,7 +86,6 @@
     const templateEvents: Record<string, () => void> = {};
     const variableRenders: Record<string, Promise<(() => void)>> = {};
     const templateRenderers: Record<string, Promise<(() => void)>> = {};
-    let templatesRenderer: Promise<HomeAssistantJavaScriptTemplatesRenderer> | undefined;
     const templateValues: Record<string, unknown> = $state({});
     let dashboardRawConfig: ExpanderCardRawConfig = $state( getDashboardRawConfig() );
 
@@ -338,9 +337,6 @@
             untrackFunc();
             delete templateEvents[key];
         });
-        // Untracking alone leaves the renderer's entity subscription open
-        templatesRenderer?.then((renderer) => renderer.stop()).catch(() => {});
-        templatesRenderer = undefined;
     };
 
     const triggerHapticFeedback = (element: HTMLElement) => {
@@ -434,7 +430,6 @@
             {} as Record<string, unknown>
         );
         const haJS: Promise<HomeAssistantJavaScriptTemplatesRenderer> = getJSTemplateRenderer( { config: config, expanderCard: {} }, refs );
-        templatesRenderer = haJS;
         bindTemplateVariables(haJS);
         bindExpanderCardEvents(haJS);
         Object.values(config.templates || {}).forEach((t) => {
