@@ -32,7 +32,7 @@
         "globals": "^17.13.0",
         "postcss-preset-env": "^11.6.2",
         "prettier": "^3.9.10",
-        "prettier-plugin-svelte": "^4.1.1",
+        "prettier-plugin-svelte": "^4.2.0",
         "svelte": "5.57.3",
         "svelte-check": "^4.7.8",
         "svelte-eslint-parser": "^1.10.1",
